@@ -19,8 +19,6 @@ C:\Users\ThinhTran\Desktop\.Net\StudentManagement\StudentManagement\bin\Debug\Ad
 C:\Users\ThinhTran\Desktop\.Net\StudentManagement\StudentManagement\bin\Debug\AdonisUI.dll
 C:\Users\ThinhTran\Desktop\.Net\StudentManagement\StudentManagement\bin\Debug\AdonisUI.xml
 C:\Users\ThinhTran\Desktop\.Net\StudentManagement\StudentManagement\bin\Debug\AdonisUI.ClassicTheme.xml
-C:\Users\ThinhTran\Desktop\.Net\StudentManagement\StudentManagement\obj\Debug\View\Window1.g.cs
-C:\Users\ThinhTran\Desktop\.Net\StudentManagement\StudentManagement\obj\Debug\View\Window1.baml
 C:\Users\ThinhTran\Desktop\.Net\StudentManagement\StudentManagement\obj\Debug\Window1.g.cs
 C:\Users\ThinhTran\Desktop\.Net\StudentManagement\StudentManagement\obj\Debug\Window1.baml
 C:\Users\ThinhTran\Desktop\.Net\StudentManagement\StudentManagement\obj\Debug\App.baml
