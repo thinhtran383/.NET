@@ -1,3 +1,5 @@
+drop database SinhVienDb
+
 create database SinhVienDb;
 
 use SinhVienDb;
@@ -20,10 +22,14 @@ CONSTRAINT FK_MonHoc_Nganh FOREIGN KEY (MaNganh) REFERENCES Nganh(MaNganh)
 --Tạo bảng SinhVien:
 CREATE TABLE SinhVien (
 MaSinhVien VARCHAR(10) PRIMARY KEY,
+MaNganh VARCHAR(10) NOT NULL,
 TenSinhVien NVARCHAR(100) NOT NULL,
 NgaySinh DATE NOT NULL,
 GioiTinh BIT NOT NULL,
-MaNganh VARCHAR(10) NOT NULL,
+SoDienThoai Varchar(11),
+Email varchar(100),
+Khoa varchar(100)
+
 CONSTRAINT FK_SinhVien_Nganh FOREIGN KEY (MaNganh) REFERENCES Nganh(MaNganh)
 );
 
@@ -57,17 +63,12 @@ CONSTRAINT FK_Diem_SinhVien FOREIGN KEY (MaSinhVien) REFERENCES SinhVien(MaSinhV
 CONSTRAINT FK_Diem_MonHoc FOREIGN KEY (MaMonHoc) REFERENCES MonHoc(MaMonHoc)
 );
 
---Tạo bảng học phí
-CREATE TABLE HocPhi (
-  MaSinhVien VARCHAR(10) NOT NULL,
-  MaLopHoc VARCHAR(10) NOT NULL,
-  MaNganh VARCHAR(10) NOT NULL,
-  HocPhi FLOAT NOT NULL,
-  CONSTRAINT PK_HocPhi PRIMARY KEY (MaSinhVien, MaLopHoc),
-  CONSTRAINT FK_HocPhi_SinhVien FOREIGN KEY (MaSinhVien) REFERENCES SinhVien(MaSinhVien),
-  CONSTRAINT FK_HocPhi_LopHoc FOREIGN KEY (MaLopHoc) REFERENCES LopHoc(MaLopHoc),
-  CONSTRAINT FK_HocPhi_Nganh FOREIGN KEY (MaNganh) REFERENCES Nganh(MaNganh)
-);
+--Tạo bảng adminaccount
+create table AdminAccount(
+	id int primary key,
+	username varchar(10),
+	password varchar(10),
+)
 
 select * from Nganh;
 
@@ -75,6 +76,7 @@ delete from Nganh
 
 --Thêm dữ liệu
 
+insert into AdminAccount values(1,'1','1');
 
 INSERT INTO Nganh(MaNganh, TenNganh) VALUES
 ('CNTT', N'Công nghệ thông tin'),
