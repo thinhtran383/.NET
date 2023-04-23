@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Media.Imaging;
 using StudentManagement.Helper;
 using StudentManagement.Models;
 using StudentManagement.Utils;
@@ -14,13 +15,11 @@ namespace StudentManagement {
         private List<Account> adminAccounts = DataManager.getAdminAccounts();
 
         private bool checkAccount() {
-            string username = txtUsername.Text; 
-            string password = txtPassword.Text;
+            string username = txtUsername.Text;
+            string password = txtPassword.Password;
 
-            foreach (Account account in adminAccounts)
-            {
-                if (account.getUsername() == username && account.getPassword() == password)
-                {
+            foreach (Account account in adminAccounts) {
+                if (account.getUsername() == username && account.getPassword() == password) {
                     return true;
                 }
             }
@@ -29,14 +28,41 @@ namespace StudentManagement {
 
         }
 
-        private void Button_Click(object sender,RoutedEventArgs e) {
-            if(checkAccount())
-            {
-                MessageBox.Show("dung");
+        private void Button_Click(object sender, RoutedEventArgs e) {
+            // check null
+            if (txtUsername.Text == "" || txtPassword.Password == "") {
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin");
+                return;
             }
-            else
-            {
-                MessageBox.Show("sai");
+
+            if (checkAccount()) {
+                MessageBox.Show("Đăng nhập thành công");
+                ControlPanel control = new ControlPanel();
+                this.Close();
+                control.Show();
+            }
+            else {
+                MessageBox.Show("Tài khoản hoặc mật khẩu không chính xác");
+            }
+
+
+        }
+        
+        private int clickCount = 1;
+       
+        private void showPassword_MouseLeftButtonDown(object sender,System.Windows.Input.MouseButtonEventArgs e) {
+            if(clickCount % 2 == 1) {
+                showPassword.Text = "Hide";
+                passwordUnmark.Visibility = Visibility.Visible;
+                txtPassword.Visibility = Visibility.Hidden;
+                passwordUnmark.Text = txtPassword.Password;
+                clickCount++;
+            } else {
+                showPassword.Text = "Show";
+                passwordUnmark.Visibility = Visibility.Hidden;
+                txtPassword.Visibility = Visibility.Visible;
+                txtPassword.Password = passwordUnmark.Text;
+                clickCount++;
             }
         }
     }
