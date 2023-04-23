@@ -1,24 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using StudentManagement.Helper;
+using StudentManagement.Models;
+using StudentManagement.Utils;
 
 namespace StudentManagement {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow:Window {
+    public partial class MainWindow : Window {
         public MainWindow() {
             InitializeComponent();
+        }
+
+        private List<Account> adminAccounts = DataManager.getAdminAccounts();
+
+        private bool checkAccount() {
+            string username = txtUsername.Text; 
+            string password = txtPassword.Text;
+
+            foreach (Account account in adminAccounts)
+            {
+                if (account.getUsername() == username && account.getPassword() == password)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+
+        }
+
+        private void Button_Click(object sender,RoutedEventArgs e) {
+            if(checkAccount())
+            {
+                MessageBox.Show("dung");
+            }
+            else
+            {
+                MessageBox.Show("sai");
+            }
         }
     }
 }
