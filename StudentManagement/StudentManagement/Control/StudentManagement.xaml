@@ -24,12 +24,11 @@
         <TextBox x:Name="txtTenSinhVien" HorizontalAlignment="Left" Margin="145,480,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="177"/>
         <TextBox x:Name="txtDienThoai" HorizontalAlignment="Left" Margin="145,546,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="177" RenderTransformOrigin="0.5,0.167"/>
         <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Margin="680,417,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="177"/>
-        <TextBox x:Name="txtMaNganh" HorizontalAlignment="Left" Margin="680,480,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="177"/>
         <TextBox x:Name="txtKhoa" HorizontalAlignment="Left" Margin="680,546,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="177" RenderTransformOrigin="1.5,0.583"/>
-        <DatePicker x:Name="pickNgaySInh" HorizontalAlignment="Left" Margin="145,613,0,0" VerticalAlignment="Top" Width="177" RenderTransformOrigin="0.5,0.962"/>
+        <DatePicker x:Name="pickNgaySinh" HorizontalAlignment="Left" Margin="145,613,0,0" VerticalAlignment="Top" Width="177" RenderTransformOrigin="0.5,0.962"/>
         <ComboBox x:Name="cbGioiTinh" HorizontalAlignment="Left" Margin="680,615,0,0" VerticalAlignment="Top" Width="177">
             <ComboBoxItem>Nam</ComboBoxItem>
-            <ComboBoxItem>Nữ</ComboBoxItem>
+            <ComboBoxItem>Nu</ComboBoxItem>
 
         </ComboBox>
         <Label Content="Mã sinh viên:" FontWeight="Medium" HorizontalAlignment="Left" Margin="41,420,0,0" VerticalAlignment="Top" FontSize="14"/>
@@ -40,10 +39,11 @@
         <Label Content="Mã ngành:" FontWeight="Medium" HorizontalAlignment="Left" Margin="581,480,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.501,0.439" FontSize="14"/>
         <Label Content="Khoá:" FontWeight="Medium" HorizontalAlignment="Left" Margin="581,550,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.501,0.439" FontSize="14"/>
         <Label Content="Giới tính:" FontWeight="Medium" HorizontalAlignment="Left" Margin="582,619,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.501,0.439" FontSize="14"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="108,696,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.981,3.333" Click="Button_Click"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="270,696,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.981,3.333"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="432,696,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.981,3.333"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="594,696,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.981,3.333"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="756,696,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.981,3.333"/>
+        <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="108,696,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.981,3.333" Width="58" Click="btnAdd_Click"/>
+        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="270,696,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.981,3.333" Width="58" Click="btnUpdate_Click" />
+        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="432,696,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.981,3.333" Width="58" Click="btnDelete_Click"/>
+        <Button x:Name="btnClear" Content="Clear" HorizontalAlignment="Left" Margin="594,696,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.981,3.333" Width="58" Click="btnClear_Click"/>
+        <Button x:Name="btnExport" Content="Export" HorizontalAlignment="Left" Margin="756,696,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.981,3.333" Width="58" Click="btnExport_Click"/>
+        <ComboBox x:Name="cbNganh" HorizontalAlignment="Left" Margin="680,477,0,0" VerticalAlignment="Top" Width="177" />
     </Grid>
 </UserControl>

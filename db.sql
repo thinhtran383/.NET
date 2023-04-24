@@ -10,6 +10,8 @@ MaNganh VARCHAR(10) PRIMARY KEY,
 TenNganh NVARCHAR(100) NOT NULL
 );
 
+
+
 --Tạo bảng MonHoc:
 CREATE TABLE MonHoc (
 MaMonHoc VARCHAR(10) PRIMARY KEY,
@@ -25,11 +27,10 @@ MaSinhVien VARCHAR(10) PRIMARY KEY,
 MaNganh VARCHAR(10) NOT NULL,
 TenSinhVien NVARCHAR(100) NOT NULL,
 NgaySinh DATE NOT NULL,
-GioiTinh BIT NOT NULL,
+GioiTinh Varchar(4) NOT NULL,
 SoDienThoai Varchar(11),
 Email varchar(100),
 Khoa varchar(100)
-
 CONSTRAINT FK_SinhVien_Nganh FOREIGN KEY (MaNganh) REFERENCES Nganh(MaNganh)
 );
 
@@ -74,6 +75,8 @@ select * from Nganh;
 
 delete from Nganh
 
+select * from SinhVien
+
 --Thêm dữ liệu
 
 insert into AdminAccount values(1,'1','1');
@@ -91,10 +94,12 @@ INSERT INTO MonHoc(MaMonHoc, TenMonHoc, SoTinChi, MaNganh) VALUES
 ('ENG1001', N'Tiếng Anh cơ bản', 2, 'NgoaiNgu'),
 ('ENG1002', N'Tiếng Anh giao tiếp', 3, 'NgoaiNgu');
 
+insert into SinhVien values ('s1','CNTT','2','1-10-2022','3','4','312','12');
+
 INSERT INTO SinhVien(MaSinhVien, TenSinhVien, NgaySinh, GioiTinh, MaNganh) VALUES
-('SV001', N'Nguyễn Văn A', '2000-01-01', 1, 'CNTT'),
-('SV002', N'Phạm Thị B', '2000-02-02', 0, 'KinhTe'),
-('SV003', N'Trần Văn C', '2000-03-03', 1, 'NgoaiNgu');
+('SV001', N'Nguyễn Văn A', '2000-01-01', 'Nam', 'CNTT'),
+('SV002', N'Phạm Thị B', '2000-02-02', 'Nu', 'KinhTe'),
+('SV003', N'Trần Văn C', '2000-03-03', 'Nu', 'NgoaiNgu');
 
 INSERT INTO LopHoc(MaLopHoc, TenLopHoc, MaMonHoc, MaNganh) VALUES
 ('LT001', N'Lập trình căn bản A', 'INT1001', 'CNTT'),

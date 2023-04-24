@@ -41,12 +41,25 @@
     <Reference Include="AdonisUI.ClassicTheme, Version=1.17.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\AdonisUI.ClassicTheme.1.17.1\lib\net45\AdonisUI.ClassicTheme.dll</HintPath>
     </Reference>
+    <Reference Include="ControlzEx, Version=4.0.0.0, Culture=neutral, PublicKeyToken=69f1c32f803d307e, processorArchitecture=MSIL">
+      <HintPath>..\packages\ControlzEx.4.4.0\lib\net462\ControlzEx.dll</HintPath>
+    </Reference>
     <Reference Include="DocumentFormat.OpenXml, Version=2.20.0.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
       <HintPath>..\packages\DocumentFormat.OpenXml.2.20.0\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
     </Reference>
+    <Reference Include="MahApps.Metro, Version=2.0.0.0, Culture=neutral, PublicKeyToken=51482d6f650b2b3f, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.2.4.9\lib\net47\MahApps.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.19\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -70,11 +83,26 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
+    <Compile Include="Constant\Regex.cs" />
+    <Compile Include="ControlPanel.xaml.cs">
+      <DependentUpon>ControlPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\CourseManagement.xaml.cs">
+      <DependentUpon>CourseManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\StudentManagement.xaml.cs">
+      <DependentUpon>StudentManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\DataManager.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Student.cs" />
+    <Compile Include="Utils\ExcuteQuery.cs" />
+    <Compile Include="Utils\ExcelExporter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Account.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -102,15 +130,65 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="ViewModels\" />
-    <Folder Include="View\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="MainWindow.xaml">
+    <Page Include="ControlPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Control\CourseManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\StudentManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\bg.jpg" />
+    <Resource Include="Resources\Images\blue_tick.png" />
+    <Resource Include="Resources\Images\cancel.png" />
+    <Resource Include="Resources\Images\doc.png" />
+    <Resource Include="Resources\Images\embarrassed.png" />
+    <Resource Include="Resources\Images\file.png" />
+    <Resource Include="Resources\Images\folder.png" />
+    <Resource Include="Resources\Images\image_default.png" />
+    <Resource Include="Resources\Images\information.png" />
+    <Resource Include="Resources\Images\jpg.png" />
+    <Resource Include="Resources\Images\left.png" />
+    <Resource Include="Resources\Images\logo.png" />
+    <Resource Include="Resources\Images\NoData.png" />
+    <Resource Include="Resources\Images\owl.png" />
+    <Resource Include="Resources\Images\pdf.png" />
+    <Resource Include="Resources\Images\picture.png" />
+    <Resource Include="Resources\Images\png.png" />
+    <Resource Include="Resources\Images\ppt.png" />
+    <Resource Include="Resources\Images\question-mark.png" />
+    <Resource Include="Resources\Images\right.png" />
+    <Resource Include="Resources\Images\send.png" />
+    <Resource Include="Resources\Images\txt.png" />
+    <Resource Include="Resources\Images\user.png" />
+    <Resource Include="Resources\Images\warning-sign.png" />
+    <Resource Include="Resources\Images\worldwide.png" />
+    <Resource Include="Resources\Images\xls.png" />
+    <Resource Include="Resources\Images\zip.png" />
+    <Resource Include="Resources\Images\graduation-hat.png" />
+    <Resource Include="Resources\Images\bag.png" />
+    <Resource Include="Resources\Images\edit.png" />
+    <Resource Include="Resources\Images\edit %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\user %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\view.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\eye.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\magnifying-glass.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
