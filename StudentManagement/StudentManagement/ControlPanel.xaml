@@ -6,12 +6,12 @@
         xmlns:local="clr-namespace:StudentManagement"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="ControlPanel" Height="791" Width="1500">
+        Title="ControlPanel" Height="791" Width="1300">
     <Grid Margin="0,0,1,0">
 
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" MinWidth="788"/>
             <ColumnDefinition Width="Auto"/>
-
         </Grid.ColumnDefinitions>
 
         <ListBox Background="AliceBlue" Grid.Column="0" x:Name="listMenu" Margin="0,0,566,0" SelectionChanged="listMenu_SelectionChanged" Loaded="listMenu_Loaded">
@@ -37,7 +37,7 @@
             </ListBoxItem>
 
         </ListBox>
-        <ContentControl   x:Name="contentControl" Margin="226,0,-701,0"/>
-        <Button Content="Đăng xuất" HorizontalAlignment="Left" Margin="75,682,0,0" VerticalAlignment="Top" Width="72" Click="Button_Click" Height="24"/>
+        <ContentControl   x:Name="contentControl" Margin="227,-10,-511,10" Grid.ColumnSpan="2"/>
+        <Button Grid.Column="0" Content="Đăng xuất" HorizontalAlignment="Left" Margin="75,682,0,0" VerticalAlignment="Top" Width="72" Click="Button_Click" Height="24"/>
     </Grid>
 </Window>
