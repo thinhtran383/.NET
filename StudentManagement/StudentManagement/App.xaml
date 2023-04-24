@@ -1,7 +1,10 @@
-﻿<Application x:Class="StudentManagement.App"
+﻿
+
+
+<Application x:Class="StudentManagement.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:StudentManagement"
+             xmlns:controls="http://metro.mahapps.com/winf/xaml/controls"
              xmlns:adonisUi="clr-namespace:AdonisUI;assembly=AdonisUI"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
@@ -9,9 +12,9 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/AdonisUI;component/ColorSchemes/Light.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/AdonisUI.ClassicTheme;component/Resources.xaml"/>
+
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
 
-   
