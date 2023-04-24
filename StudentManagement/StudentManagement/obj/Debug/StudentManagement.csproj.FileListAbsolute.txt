@@ -32,9 +32,9 @@ C:\Users\ThinhTran\Desktop\.Net\StudentManagement\StudentManagement\obj\Debug\Co
 C:\Users\ThinhTran\Desktop\.Net\StudentManagement\StudentManagement\obj\Debug\ControlPanel.baml
 C:\Users\ThinhTran\Desktop\.Net\StudentManagement\StudentManagement\obj\Debug\Control\StudentManagement.g.cs
 C:\Users\ThinhTran\Desktop\.Net\StudentManagement\StudentManagement\obj\Debug\Control\StudentManagement.baml
-C:\Users\ThinhTran\Desktop\.Net\StudentManagement\StudentManagement\obj\Debug\Control\CourseManagement.g.cs
-C:\Users\ThinhTran\Desktop\.Net\StudentManagement\StudentManagement\obj\Debug\Control\CourseManagement.baml
 C:\Users\ThinhTran\Desktop\.Net\StudentManagement\StudentManagement\bin\Debug\MahApps.Metro.dll
 C:\Users\ThinhTran\Desktop\.Net\StudentManagement\StudentManagement\bin\Debug\MahApps.Metro.pdb
 C:\Users\ThinhTran\Desktop\.Net\StudentManagement\StudentManagement\bin\Debug\MahApps.Metro.xml
 C:\Users\ThinhTran\Desktop\.Net\StudentManagement\StudentManagement\bin\Debug\de\MahApps.Metro.resources.dll
+C:\Users\ThinhTran\Desktop\.Net\StudentManagement\StudentManagement\obj\Debug\Control\CourseManagement.g.cs
+C:\Users\ThinhTran\Desktop\.Net\StudentManagement\StudentManagement\obj\Debug\Control\CourseManagement.baml

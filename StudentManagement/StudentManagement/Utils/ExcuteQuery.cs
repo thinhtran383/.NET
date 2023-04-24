@@ -1,4 +1,6 @@
-﻿using System.Data.SqlClient;
+﻿using System;
+using System.Data.SqlClient;
+using System.Windows;
 
 namespace StudentManagement.Utils {
     public class ExecuteQuery {
@@ -19,10 +21,16 @@ namespace StudentManagement.Utils {
         }
 
         public static SqlDataReader executeReader(string sql) {
-            SqlConnection connection = new SqlConnection(connectionString);
-            SqlCommand command = new SqlCommand(sql, connection);
-            connection.Open();
-            return command.ExecuteReader();
+            try {
+                SqlConnection connection = new SqlConnection(connectionString);
+                SqlCommand command = new SqlCommand(sql, connection);
+                connection.Open();
+                return command.ExecuteReader();
+            }
+            catch (SqlException e) {
+                MessageBox.Show("Không thể kết nối đến cơ sở dữ liệu");
+                throw;
+            }
         }
     }
 }
