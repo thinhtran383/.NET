@@ -30,36 +30,7 @@ namespace StudentManagement.Control {
         }
 
         private void dgStudent_Loaded(object sender, RoutedEventArgs e) {
-
-            DataTable dt = new DataTable();
-
-            dt.Columns.Add("Mã sinh viên");
-            dt.Columns.Add("Mã ngành");
-            dt.Columns.Add("Họ tên");
-            dt.Columns.Add("Ngày sinh");
-            dt.Columns.Add("Giới tính");
-            dt.Columns.Add("Số điện thoại");
-            dt.Columns.Add("Email");
-            dt.Columns.Add("Khoa");
-
-
-
-
-            foreach (var student in studentList) {
-                DataRow row = dt.NewRow();
-                row["Mã sinh viên"] = student.getMaSV();
-                row["Mã ngành"] = student.getMaNganh();
-                row["Họ tên"] = student.getHoTen();
-                row["Ngày sinh"] = student.getNgaySinh();
-                row["Giới tính"] = student.getGioiTinh();
-                row["Số điện thoại"] = student.getSoDT();
-                row["Email"] = student.getEmail();
-                row["Khoa"] = student.getKhoa();
-                dt.Rows.Add(row);
-            }
-
-            dgStudent.ItemsSource = dt.DefaultView;
-
+            dgStudent.ItemsSource = studentList;
         }
 
         private void dgStudent_SelectionChanged(object sender, SelectionChangedEventArgs e) {
@@ -70,7 +41,7 @@ namespace StudentManagement.Control {
                 string maSv = selectedStudent["Mã sinh viên"].ToString();
                 string maNganh = selectedStudent["Mã ngành"].ToString();
                 string hoTen = selectedStudent["Họ tên"].ToString();
-                string ngaySinh = selectedStudent["Ngày sinh"].ToString();
+                string ngaySinh = selectedStudent["Ngày sinh"].ToString("dd/MM/yyyy");
                 string gioiTinh = selectedStudent["Giới tính"].ToString();
                 string soDT = selectedStudent["Số điện thoại"].ToString();
                 string email = selectedStudent["Email"].ToString();
@@ -93,7 +64,7 @@ namespace StudentManagement.Control {
         private void clear() {
             txtMaSinhVien.Text = "";
         
-          cbNganh.Text = "";
+            cbNganh.Text = "";
             txtTenSinhVien.Text = "";
             txtDienThoai.Text = "";
             txtEmail.Text = "";
@@ -113,7 +84,7 @@ namespace StudentManagement.Control {
 
         private void btnAdd_Click(object sender,RoutedEventArgs e) {
             DateTime date = DateTime.Parse(pickNgaySinh.Text);
-          //  string sqlAdd = "INSERT INTO SinhVien VALUES ('" + txtMaSinhVien.Text + "', '" + cbNganh.Text + "', N'" + txtTenSinhVien.Text + "', '" + date + "', N'" + cbGioiTinh.Text + "', '" + txtDienThoai.Text + "', '" + txtEmail.Text + "', N'" + txtKhoa.Text + "')";
+            string sqlAdd = "INSERT INTO SinhVien VALUES ('" + txtMaSinhVien.Text + "', '" + cbNganh.Text + "', N'" + txtTenSinhVien.Text + "', '" + date + "', N'" + cbGioiTinh.Text + "', '" + txtDienThoai.Text + "', '" + txtEmail.Text + "', N'" + txtKhoa.Text + "')";
            // ExecuteQuery.executeNonQuery(sqlAdd);
           
 
