@@ -1,12 +1,31 @@
-﻿<UserControl x:Class="StudentManagement.Control.CourseManagement"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:StudentManagement.Control"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" x:Class="StudentManagement.Control.CourseManagement"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="791" d:DesignWidth="900">
     <Grid Background="White">
-            
+        <Label Content="Mã học phần:" HorizontalAlignment="Left" Margin="28,85,0,0" VerticalAlignment="Top" Height="24" Width="78"/>
+        <Label Content="Tên học phần:" HorizontalAlignment="Left" Margin="28,138,0,0" VerticalAlignment="Top" Height="29" Width="78" RenderTransformOrigin="0.132,0.385"/>
+        <Label Content="Tín chỉ:" HorizontalAlignment="Left" Margin="28,194,0,0" VerticalAlignment="Top" Height="24" Width="78"/>
+        <TextBox HorizontalAlignment="Left" Margin="120,79,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="180" Height="24"/>
+        <TextBox HorizontalAlignment="Left" Margin="120,133,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="180" RenderTransformOrigin="0.483,1.129" Height="27"/>
+        <TextBox HorizontalAlignment="Left" Margin="120,189,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" Height="24"/>
+        <Label Content="Search:" HorizontalAlignment="Left" Margin="486,21,0,0" VerticalAlignment="Top" Height="28" Width="97" FontSize="18"/>
+        <TextBox HorizontalAlignment="Left" Margin="588,16,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="207" Height="33"/>
+        <Button Content="Update" HorizontalAlignment="Left" Margin="63,258,0,0" VerticalAlignment="Top"/>
+        <Button Content="Add" HorizontalAlignment="Left" Margin="63,313,0,0" VerticalAlignment="Top" Width="55"/>
+        <Button Content="Delete" HorizontalAlignment="Left" Margin="189,258,0,0" VerticalAlignment="Top" Width="55"/>
+        <Button Content="Clear" HorizontalAlignment="Left" Margin="189,312,0,0" VerticalAlignment="Top" Height="24" Width="55"/>
+        <Button Content="Export" HorizontalAlignment="Left" Margin="189,364,0,0" VerticalAlignment="Top" Width="55"/>
+        <Rectangle HorizontalAlignment="Left" Height="172" Margin="20,62,0,0" Stroke="Black" VerticalAlignment="Top" Width="295" RenderTransformOrigin="0.4,0.46"/>
+        <Rectangle HorizontalAlignment="Left" Height="729" Margin="360,62,0,0" Stroke="Black" VerticalAlignment="Top" Width="651"/>
+        <DataGrid  Margin="360,62,60,0"/>
+
+
+
     </Grid>
 </UserControl>
