@@ -87,11 +87,11 @@
     <Compile Include="ControlPanel.xaml.cs">
       <DependentUpon>ControlPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Control\CourseManagement.xaml.cs">
-      <DependentUpon>CourseManagement.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Control\StudentManagement.xaml.cs">
       <DependentUpon>StudentManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\CourseManagement.xaml.cs">
+      <DependentUpon>CourseManagement.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helper\DataManager.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -134,13 +134,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Control\CourseManagement.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Control\StudentManagement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\CourseManagement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainWindow.xaml" />
   </ItemGroup>
