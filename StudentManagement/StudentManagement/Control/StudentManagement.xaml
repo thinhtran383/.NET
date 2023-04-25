@@ -17,8 +17,18 @@
             </StackPanel>
         </Label>
         <TextBox HorizontalAlignment="Left" Margin="183,14,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="177" Height="30"/>
-        <DataGrid RowHeight="30" x:Name="dgStudent"   Margin="0,60,0,433" Loaded="dgStudent_Loaded" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" IsReadOnly="True" SelectionChanged="dgStudent_SelectionChanged">
-
+        <DataGrid AutoGenerateColumns="False"  RowHeight="30" x:Name="dgStudent"   Margin="0,60,0,433" Loaded="dgStudent_Loaded" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" IsReadOnly="True" SelectionChanged="dgStudent_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="120" Header="Mã sinh viên" Binding="{Binding MaSV}" />
+                <DataGridTextColumn Header="Mã ngành" Binding="{Binding MaNganh}" />
+                <DataGridTextColumn Width="120"  Header="Họ tên" Binding="{Binding HoTen}" />
+                <DataGridTextColumn Width="120" Header="Ngày sinh" Binding="{Binding NgaySinh}" />
+                <DataGridTextColumn Width="100" Header="Giới tính" Binding="{Binding GioiTinh}" />
+                <DataGridTextColumn Width="150" Header="Số điện thoại" Binding="{Binding SoDT}" />
+                <DataGridTextColumn Width="170" Header="Email" Binding="{Binding Email}" />
+                <DataGridTextColumn Header="Khoa" Binding="{Binding Khoa}" />
+                <DataGridTextColumn Header="Địa chỉ" Binding="{Binding DiaChi}" />
+            </DataGrid.Columns>
         </DataGrid>
         <TextBox x:Name="txtMaSinhVien" HorizontalAlignment="Left" Margin="145,417,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="177"/>
         <TextBox x:Name="txtTenSinhVien" HorizontalAlignment="Left" Margin="145,480,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="177"/>
