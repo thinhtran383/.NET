@@ -15,86 +15,58 @@ namespace StudentManagement.Models {
         private string email;
         private string khoa;
 
+        public string MaSV {
+            get => maSV;
+            set => maSV = value;
+        }
+
+        public string MaNganh {
+            get => maNganh;
+            set => maNganh = value;
+        }
+
+        public string HoTen {
+            get => hoTen;
+            set => hoTen = value;
+        }
+
+        public DateTime NgaySinh {
+            get => ngaySinh;
+            set => ngaySinh = value.Date;
+        }
+
+        public string GioiTinh {
+            get => gioiTinh;
+            set => gioiTinh = value;
+        }
+
+        public string SoDT {
+            get => soDT;
+            set => soDT = value;
+        }
+
+        public string Email {
+            get => email;
+            set => email = value;
+        }
+
+        public string Khoa {
+            get => khoa;
+            set => khoa = value;
+        }
 
         public Student() {
         }
 
-        public Student(string hoTen,string maSV, string maNganh, DateTime ngaySinh, string gioiTinh, string soDT, string email, string khoa) {
+        public Student(string hoTen,string maSV,string maNganh,DateTime ngaySinh,string gioiTinh,string soDT,string email,string khoa) {
             this.hoTen = hoTen;
             this.maSV = maSV;
             this.maNganh = maNganh;
-            this.ngaySinh = ngaySinh;
+            this.ngaySinh = ngaySinh.Date;
             this.gioiTinh = gioiTinh;
             this.soDT = soDT;
             this.email = email;
             this.khoa = khoa;
         }
-
-       
-
-        public void setMaSV(string maSV) {
-            this.maSV = maSV;
-        }
-
-        public string getMaSV() {
-            return this.maSV;
-        }
-
-        public void setMaNganh(string maNganh) {
-            this.maNganh = maNganh;
-        }
-
-        public string getMaNganh() {
-            return this.maNganh;
-        }
-
-        public void setHoTen(string hoTen) {
-            this.hoTen = hoTen;
-        }
-
-        public string getHoTen() {
-            return this.hoTen;
-        }
-
-        public void setNgaySinh(DateTime ngaySinh) {
-            this.ngaySinh = ngaySinh;
-        }
-
-        public DateTime getNgaySinh() {
-            return this.ngaySinh;
-        }
-
-        public void setGioiTinh(string gioiTinh) {
-            this.gioiTinh = gioiTinh;
-        }
-
-        public string getGioiTinh() {
-            return this.gioiTinh;
-        }
-
-        public void setSoDT(string soDT) {
-            this.soDT = soDT;
-        }
-
-        public string getSoDT() {
-            return this.soDT;
-        }
-
-        public void setEmail(string email) {
-            this.email = email;
-        }
-
-        public string getEmail() {
-            return this.email;
-        }
-
-        public void setKhoa(string khoa) {
-            this.khoa = khoa;
-        }
-
-        public string getKhoa() {
-            return this.khoa;
-        }
-
     }
 }
