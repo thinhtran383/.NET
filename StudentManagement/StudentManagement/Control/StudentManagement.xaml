@@ -17,7 +17,7 @@
             </StackPanel>
         </Label>
         <TextBox HorizontalAlignment="Left" Margin="183,14,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="177" Height="30"/>
-        <DataGrid AutoGenerateColumns="False"  RowHeight="30" x:Name="dgStudent"   Margin="0,60,0,433" Loaded="dgStudent_Loaded" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" IsReadOnly="True" SelectionChanged="dgStudent_SelectionChanged">
+        <DataGrid AutoGenerateColumns="False"  RowHeight="30" x:Name="dgStudent"   Margin="0,60,0,433" Loaded="dgStudent_Loaded" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" IsReadOnly="True" >
             <DataGrid.Columns>
                 <DataGridTextColumn Width="120" Header="Mã sinh viên" Binding="{Binding MaSV}" />
                 <DataGridTextColumn Header="Mã ngành" Binding="{Binding MaNganh}" />
