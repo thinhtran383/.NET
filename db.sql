@@ -26,7 +26,7 @@ CREATE TABLE SinhVien (
 MaSinhVien VARCHAR(10) PRIMARY KEY,
 MaNganh VARCHAR(10) NOT NULL,
 TenSinhVien NVARCHAR(100) NOT NULL,
-NgaySinh DATE NOT NULL,
+NgaySinh Date NOT NULL,
 GioiTinh Varchar(4) NOT NULL,
 SoDienThoai Varchar(11),
 Email varchar(100),
@@ -75,7 +75,14 @@ select * from Nganh;
 
 delete from Nganh
 
-select * from SinhVien
+select * from SinhVien;
+
+select * from Diem;
+
+delete  from SinhVien where MaSinhVien = 'SV001';
+delete from Diem where MaSinhVien ='SV001';
+DELETE FROM DangKi WHERE MaSinhVien = 'SV001'
+
 
 --Thêm dữ liệu
 
@@ -134,3 +141,16 @@ JOIN LopHoc LH ON DK.MaLopHoc = LH.MaLopHoc
 JOIN MonHoc MH ON LH.MaMonHoc = MH.MaMonHoc
 WHERE SV.MaSinhVien = 'SV001' --thay MSV001 bằng mã sinh viên cần tìm
 GROUP BY SV.MaSinhVien;
+
+--Trigger
+CREATE TRIGGER trgDeleteSinhVien
+ON SinhVien
+AFTER DELETE
+AS
+BEGIN
+    -- Xoá các bản ghi trong bảng DangKi liên quan đến sinh viên đã bị xoá
+    DELETE FROM DangKi WHERE MaSinhVien IN (SELECT MaSinhVien FROM deleted)
+
+    -- Xoá các bản ghi trong bảng Diem liên quan đến sinh viên đã bị xoá
+    DELETE FROM Diem WHERE MaSinhVien IN (SELECT MaSinhVien FROM deleted)
+END
