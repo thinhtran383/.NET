@@ -7,16 +7,18 @@ namespace StudentManagement.Utils {
         private static string connectionString = @"Data Source=THINHTRAN\MSSQLSERVER02;Initial Catalog=SinhVienDb;Integrated Security=True;";
 
         public static void executeNonQuery(string sql) {
-            // Khởi tạo đối tượng SqlConnection để kết nối tới SQL Server
-            using (SqlConnection connection = new SqlConnection(connectionString)) {
-                // Mở kết nối tới SQL Server
-                connection.Open();
 
-                // Khởi tạo đối tượng SqlCommand để thực thi câu lệnh SQL
-                using (SqlCommand command = new SqlCommand(sql, connection)) {
-                    // Thực thi câu lệnh SQL và không trả về bất kỳ dữ liệu nào
-                    command.ExecuteNonQuery();
+            try {
+                using (var connection = new SqlConnection(connectionString)) {
+                    connection.Open();
+                    using (var command = new SqlCommand(sql, connection)) {
+                        command.ExecuteNonQuery();
+                    }
                 }
+            }
+            catch (SqlException e) {
+                MessageBox.Show("Không thể kết nối đến cơ sở dữ liệu");
+                throw;
             }
         }
 
