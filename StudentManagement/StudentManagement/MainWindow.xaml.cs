@@ -42,7 +42,7 @@ namespace StudentManagement {
                 control.Show();
             }
             else {
-                MessageBox.Show("Tài khoản hoặc mật khẩu không chính xác");
+                lbErr.Content = "*Tài khoản hoặc mật khẩu không chính xác";
             }
 
 
