@@ -8,22 +8,33 @@
              mc:Ignorable="d" 
              d:DesignHeight="791" d:DesignWidth="900">
     <Grid Background="White">
+        <Label  FontWeight="Medium" HorizontalAlignment="Left" Margin="82,19,0,0" VerticalAlignment="Top" FontSize="14">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="../Resources/Images/magnifying-glass.png" Margin="0,0,10,0" Width="20" Height="20"/>
+                <TextBlock Text="Tìm kiếm: "/>
+            </StackPanel>
+        </Label>
         <Label Content="Mã học phần:" HorizontalAlignment="Left" Margin="28,85,0,0" VerticalAlignment="Top" Height="24" Width="78"/>
         <Label Content="Tên học phần:" HorizontalAlignment="Left" Margin="28,138,0,0" VerticalAlignment="Top" Height="29" Width="78" RenderTransformOrigin="0.132,0.385"/>
         <Label Content="Tín chỉ:" HorizontalAlignment="Left" Margin="28,194,0,0" VerticalAlignment="Top" Height="24" Width="78"/>
         <TextBox HorizontalAlignment="Left" Margin="120,79,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="180" Height="24"/>
         <TextBox HorizontalAlignment="Left" Margin="120,133,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="180" RenderTransformOrigin="0.483,1.129" Height="27"/>
         <TextBox HorizontalAlignment="Left" Margin="120,189,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" Height="24"/>
-        <Label Content="Search:" HorizontalAlignment="Left" Margin="486,21,0,0" VerticalAlignment="Top" Height="28" Width="97" FontSize="18"/>
-        <TextBox HorizontalAlignment="Left" Margin="588,16,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="207" Height="33"/>
-        <Button Content="Update" HorizontalAlignment="Left" Margin="63,258,0,0" VerticalAlignment="Top"/>
-        <Button Content="Add" HorizontalAlignment="Left" Margin="63,313,0,0" VerticalAlignment="Top" Width="55"/>
-        <Button Content="Delete" HorizontalAlignment="Left" Margin="189,258,0,0" VerticalAlignment="Top" Width="55"/>
-        <Button Content="Clear" HorizontalAlignment="Left" Margin="189,312,0,0" VerticalAlignment="Top" Height="24" Width="55"/>
-        <Button Content="Export" HorizontalAlignment="Left" Margin="189,364,0,0" VerticalAlignment="Top" Width="55"/>
-        <Rectangle HorizontalAlignment="Left" Height="172" Margin="20,62,0,0" Stroke="Black" VerticalAlignment="Top" Width="295" RenderTransformOrigin="0.4,0.46"/>
-        <Rectangle HorizontalAlignment="Left" Height="729" Margin="360,62,0,0" Stroke="Black" VerticalAlignment="Top" Width="651"/>
-        <DataGrid  Margin="360,62,60,0"/>
+        <Button Content="Update" HorizontalAlignment="Left" Margin="44,258,0,0" VerticalAlignment="Top"/>
+        <Button Content="Add" HorizontalAlignment="Left" Margin="44,313,0,0" VerticalAlignment="Top" Width="55"/>
+        <Button Content="Delete" HorizontalAlignment="Left" Margin="223,258,0,0" VerticalAlignment="Top" Width="55"/>
+        <Button Content="Clear" HorizontalAlignment="Left" Margin="223,312,0,0" VerticalAlignment="Top" Height="24" Width="55"/>
+        <Button Content="Export" HorizontalAlignment="Left" Margin="223,364,0,0" VerticalAlignment="Top" Width="55"/>
+        <Rectangle HorizontalAlignment="Left" Height="173" Margin="20,62,0,0" Stroke="Black" VerticalAlignment="Top" Width="295" RenderTransformOrigin="0.4,0.46"/>
+        <Rectangle HorizontalAlignment="Left" Height="730" Margin="360,62,0,0" Stroke="Black" VerticalAlignment="Top" Width="652"/>
+        <DataGrid x:Name="dgCourses"  Margin="360,62,60,0" AutoGenerateColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" Loaded="dgCourses_Loaded">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="120" Header="Mã học phần" Binding="{Binding MaMonHoc}"/>
+                <DataGridTextColumn Width="210" Header="Tên học phần" Binding="{Binding TenMonHoc}"/>
+                <DataGridTextColumn Width="290" Header="Tín chỉ" Binding="{Binding SoTinChi}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBox HorizontalAlignment="Left" Margin="183,14,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="177" Height="30"/>
 
 
 
