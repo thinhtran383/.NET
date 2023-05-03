@@ -29,7 +29,7 @@ namespace StudentManagement.Helper {
                string tenMonHoc = _dataReader.IsDBNull(_dataReader.GetOrdinal("TenMonHoc")) ? "" : _dataReader.GetString(_dataReader.GetOrdinal("TenMonHoc"));
                int soTinChi = _dataReader.IsDBNull(_dataReader.GetOrdinal("SoTinChi")) ? 0 : _dataReader.GetInt32(_dataReader.GetOrdinal("SoTinChi"));
                string maNganh = _dataReader.IsDBNull(_dataReader.GetOrdinal("MaNganh")) ? "" : _dataReader.GetString(_dataReader.GetOrdinal("MaNganh"));
-               courseList.Add(new Course(maMonHoc,tenMonHoc,soTinChi));
+               courseList.Add(new Course(maMonHoc,tenMonHoc,soTinChi,maNganh));
            }
         }
 
