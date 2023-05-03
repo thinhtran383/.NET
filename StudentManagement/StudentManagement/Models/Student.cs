@@ -31,7 +31,7 @@ namespace StudentManagement.Models {
         }
 
         public DateTime NgaySinh {
-            get => ngaySinh;
+            get => ngaySinh.Date;
             set => ngaySinh = value.Date;
         }
 

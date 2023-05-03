@@ -22,7 +22,7 @@ using StudentManagement.Utils;
 namespace StudentManagement.Control {
 
     public partial class StudentManagement:UserControl {
-        private ObservableCollection<Student> studentList = DataManager.getStudentList();
+        private ObservableCollection<Student> studentList = DataManager.GetStudentList();
 
         public StudentManagement() {
             InitializeComponent();
