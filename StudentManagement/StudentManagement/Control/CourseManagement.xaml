@@ -17,24 +17,31 @@
         <Label Content="Mã học phần:" HorizontalAlignment="Left" Margin="28,85,0,0" VerticalAlignment="Top" Height="24" Width="78"/>
         <Label Content="Tên học phần:" HorizontalAlignment="Left" Margin="28,138,0,0" VerticalAlignment="Top" Height="29" Width="78" RenderTransformOrigin="0.132,0.385"/>
         <Label Content="Tín chỉ:" HorizontalAlignment="Left" Margin="28,194,0,0" VerticalAlignment="Top" Height="24" Width="78"/>
-        <TextBox HorizontalAlignment="Left" Margin="120,79,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="180" Height="24"/>
-        <TextBox HorizontalAlignment="Left" Margin="120,133,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="180" RenderTransformOrigin="0.483,1.129" Height="27"/>
-        <TextBox HorizontalAlignment="Left" Margin="120,189,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" Height="24"/>
-        <Button Content="Update" HorizontalAlignment="Left" Margin="44,258,0,0" VerticalAlignment="Top"/>
-        <Button Content="Add" HorizontalAlignment="Left" Margin="44,313,0,0" VerticalAlignment="Top" Width="55"/>
-        <Button Content="Delete" HorizontalAlignment="Left" Margin="223,258,0,0" VerticalAlignment="Top" Width="55"/>
-        <Button Content="Clear" HorizontalAlignment="Left" Margin="223,312,0,0" VerticalAlignment="Top" Height="24" Width="55"/>
-        <Button Content="Export" HorizontalAlignment="Left" Margin="223,364,0,0" VerticalAlignment="Top" Width="55"/>
-        <Rectangle HorizontalAlignment="Left" Height="173" Margin="20,62,0,0" Stroke="Black" VerticalAlignment="Top" Width="295" RenderTransformOrigin="0.4,0.46"/>
+        <TextBox x:Name="txtMaHocPhan" HorizontalAlignment="Left" Margin="120,79,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="180" Height="24" TextChanged="TextChanged"/>
+        <TextBox x:Name="txtTenHocPhan" HorizontalAlignment="Left" Margin="120,133,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="180" RenderTransformOrigin="0.483,1.129" Height="27" TextChanged="TextChanged"/>
+        <TextBox x:Name="txtTinChi" HorizontalAlignment="Left" Margin="120,189,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" Height="24" TextChanged="TextChanged"/>
+        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="44,321,0,0" VerticalAlignment="Top" Click="btnUpdate_Click"/>
+        <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="44,376,0,0" VerticalAlignment="Top" Width="55" Click="btnAdd_Click"/>
+        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="223,321,0,0" VerticalAlignment="Top" Width="55" Click="btnDelete_Click"/>
+        <Button x:Name="btnClear" Content="Clear" HorizontalAlignment="Left" Margin="223,375,0,0" VerticalAlignment="Top" Height="24" Width="55" Click="btnClear_Click"/>
+        <Button x:Name="btnExport" Content="Export" HorizontalAlignment="Left" Margin="223,428,0,0" VerticalAlignment="Top" Width="55" Click="btnExport_Click"/>
+        <Rectangle HorizontalAlignment="Left" Height="173" Margin="44,537,0,0" Stroke="Black" VerticalAlignment="Top" Width="295" RenderTransformOrigin="0.4,0.46"/>
         <Rectangle HorizontalAlignment="Left" Height="730" Margin="360,62,0,0" Stroke="Black" VerticalAlignment="Top" Width="652"/>
         <DataGrid x:Name="dgCourses"  Margin="360,62,60,0" AutoGenerateColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" Loaded="dgCourses_Loaded">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="120" Header="Mã học phần" Binding="{Binding MaMonHoc}"/>
                 <DataGridTextColumn Width="210" Header="Tên học phần" Binding="{Binding TenMonHoc}"/>
-                <DataGridTextColumn Width="290" Header="Tín chỉ" Binding="{Binding SoTinChi}"/>
+                <DataGridTextColumn Width="50" Header="Tín chỉ" Binding="{Binding SoTinChi}"/>
+                <DataGridTextColumn Width="120" Header="Mã ngành" Binding="{Binding MaNganh}"/>
             </DataGrid.Columns>
         </DataGrid>
         <TextBox HorizontalAlignment="Left" Margin="183,14,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="177" Height="30"/>
+        <Label x:Name="lbErrMa" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="120,63,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbErrTen" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="120,117,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.585,0.54"/>
+        <Label x:Name="lbErrTin" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="121,173,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.169,3.321"/>
+        <Label Content="Mã ngành:" HorizontalAlignment="Left" Margin="28,251,0,0" VerticalAlignment="Top" Height="29" Width="78" RenderTransformOrigin="0.132,0.385"/>
+        <ComboBox x:Name="cbMaNganh" HorizontalAlignment="Left" Margin="121,247,0,0" VerticalAlignment="Top" Width="179" SelectionChanged="cbMaNganh_SelectionChanged"/>
+        <Label x:Name="lbErrNganh" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="121,231,0,0" VerticalAlignment="Top"/>
 
 
 
