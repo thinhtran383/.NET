@@ -14,7 +14,7 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <ListBox Background="AliceBlue" Grid.Column="0" x:Name="listMenu" Margin="0,0,566,0" SelectionChanged="listMenu_SelectionChanged" Loaded="listMenu_Loaded">
+        <ListBox Background="AliceBlue" Grid.Column="0" x:Name="listMenu" Margin="0,304,566,0" SelectionChanged="listMenu_SelectionChanged" Loaded="listMenu_Loaded">
             <ListBoxItem Height="50" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" >
                 <StackPanel Orientation="Horizontal">
                     <Image Source="Resources/Images/graduation-hat.png" Margin="0,0,10,0" Width="20" Height="20"/>
@@ -37,7 +37,15 @@
             </ListBoxItem>
 
         </ListBox>
-        <ContentControl   x:Name="contentControl" Margin="227,-10,-511,10" Grid.ColumnSpan="2"/>
+        <ContentControl   x:Name="contentControl" Margin="227,-10,-511,10" Grid.ColumnSpan="2">
+            <ListView d:ItemsSource="{d:SampleData ItemCount=5}" Margin="-226,9,1074,461">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </ContentControl>
         <Button Grid.Column="0" Content="Đăng xuất" HorizontalAlignment="Left" Margin="75,682,0,0" VerticalAlignment="Top" Width="72" Click="Button_Click" Height="24"/>
     </Grid>
 </Window>
