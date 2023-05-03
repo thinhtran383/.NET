@@ -10,6 +10,7 @@ using StudentManagement.Utils;
 namespace StudentManagement.Helper {
     public class DataManager {
         ObservableCollection<Student> studentList = new ObservableCollection<Student>();
+        ObservableCollection<Course> courseList = new ObservableCollection<Course>();
 
         private static List<Account> adminAccounts = new List<Account>();
 
@@ -18,25 +19,33 @@ namespace StudentManagement.Helper {
         private DataManager() {
             initAccount();
             initStudentList();
+            initCourses();
         }
 
-        private DataManager(string type) {
-           
+        private void initCourses() {
+           SqlDataReader _dataReader = ExecuteQuery.executeReader("Select * from MonHoc");
+           while (_dataReader.Read()) {
+               string maMonHoc = _dataReader.IsDBNull(_dataReader.GetOrdinal("MaMonHoc")) ? "" : _dataReader.GetString(_dataReader.GetOrdinal("MaMonHoc"));
+               string tenMonHoc = _dataReader.IsDBNull(_dataReader.GetOrdinal("TenMonHoc")) ? "" : _dataReader.GetString(_dataReader.GetOrdinal("TenMonHoc"));
+               int soTinChi = _dataReader.IsDBNull(_dataReader.GetOrdinal("SoTinChi")) ? 0 : _dataReader.GetInt32(_dataReader.GetOrdinal("SoTinChi"));
+               string maNganh = _dataReader.IsDBNull(_dataReader.GetOrdinal("MaNganh")) ? "" : _dataReader.GetString(_dataReader.GetOrdinal("MaNganh"));
+               courseList.Add(new Course(maMonHoc,tenMonHoc,soTinChi));
+           }
         }
-        
+
         private void initAccount() {
             SqlDataReader _dataReader = ExecuteQuery.executeReader("Select * from AdminAccount");
-            while (_dataReader.Read()) {
+            while(_dataReader.Read()) {
                 string username = _dataReader.GetString(_dataReader.GetOrdinal("username"));
                 string password = _dataReader.GetString(_dataReader.GetOrdinal("password"));
-                Account account = new Account(username, password);
+                Account account = new Account(username,password);
                 adminAccounts.Add(account);
             }
         }
 
         private void initStudentList() {
             SqlDataReader _dataReader = ExecuteQuery.executeReader("Select * from SinhVien");
-            while (_dataReader.Read()) {
+            while(_dataReader.Read()) {
                 string maSV = _dataReader.IsDBNull(_dataReader.GetOrdinal("MaSinhVien")) ? "" : _dataReader.GetString(_dataReader.GetOrdinal("MaSinhVien"));
                 string maNganh = _dataReader.IsDBNull(_dataReader.GetOrdinal("MaNganh")) ? "" : _dataReader.GetString(_dataReader.GetOrdinal("MaNganh"));
                 string hoTen = _dataReader.IsDBNull(_dataReader.GetOrdinal("TenSinhVien")) ? "" : _dataReader.GetString(_dataReader.GetOrdinal("TenSinhVien"));
@@ -48,21 +57,28 @@ namespace StudentManagement.Helper {
                 Student student = new Student(hoTen,maSV,maNganh,ngaySinh,gioiTinh,soDT,email,khoa);
                 studentList.Add(student);
             }
-        }   
+        }
 
 
-        public static List<Account> getAdminAccounts() {
+        public static List<Account> GetAdminAccounts() {
             if(instance == null) {
                 instance = new DataManager();
             }
             return adminAccounts;
         }
 
-        public static ObservableCollection<Student> getStudentList() {
-            if (instance == null) {
+        public static ObservableCollection<Student> GetStudentList() {
+            if(instance == null) {
                 instance = new DataManager();
             }
             return instance.studentList;
+        }
+
+        public static ObservableCollection<Course> GetCourseList() {
+            if(instance == null) {
+                instance = new DataManager();
+            }
+            return instance.courseList;
         }
 
     }
