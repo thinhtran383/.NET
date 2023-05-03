@@ -20,7 +20,7 @@
         <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Margin="48,133,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="292" Height="26" Grid.Column="1"/>
         <Button Content="Login" HorizontalAlignment="Left" Margin="250,244,0,0" VerticalAlignment="Top" Width="89" Height="28" Click="Button_Click" IsDefault="True" Grid.Column="1"/>
         <PasswordBox  x:Name="txtPassword" HorizontalAlignment="Left" Margin="48,199,0,0" VerticalAlignment="Top" Width="292" Grid.Column="1"/>
-        <TextBox Name="passwordUnmark" Visibility="Hidden" HorizontalAlignment="Left" Margin="48,175,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="292" Grid.Column="1"/>
+        <TextBox Name="passwordUnmark" Visibility="Hidden" HorizontalAlignment="Left" Margin="48,199,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="292" Grid.Column="1"/>
         <Image HorizontalAlignment="Left" Height="0" Margin="316,191,0,0" VerticalAlignment="Top" Width="7" Grid.Column="1"/>
         <TextBlock Foreground="Gray" Text="Show"  Name="showPassword" HorizontalAlignment="Left" Margin="302,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="32" MouseLeftButtonDown="showPassword_MouseLeftButtonDown" Grid.Column="1"/>
         <Label Foreground="Red" FontWeight="Light" x:Name="lbErr" Grid.Column="1" Content="" HorizontalAlignment="Left" Margin="48,111,0,0" VerticalAlignment="Top" Width="231"/>

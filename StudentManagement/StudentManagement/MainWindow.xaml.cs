@@ -12,7 +12,7 @@ namespace StudentManagement {
             InitializeComponent();
         }
 
-        private List<Account> adminAccounts = DataManager.getAdminAccounts();
+        private List<Account> adminAccounts = DataManager.GetAdminAccounts();
 
         private bool checkAccount() {
             string username = txtUsername.Text;
