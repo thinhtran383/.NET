@@ -9,11 +9,13 @@ namespace StudentManagement.Models {
         private string maMonHoc;
         private string tenMonHoc;
         private int soTinChi;
+        private string maNganh;
 
-        public Course(string maMonHoc, string tenMonHoc, int soTinChi) {
+        public Course(string maMonHoc, string tenMonHoc, int soTinChi, string maNganh) {
             this.maMonHoc = maMonHoc;
             this.tenMonHoc = tenMonHoc;
             this.soTinChi = soTinChi;
+            this.maNganh = maNganh;
         }
         public int SoTinChi {
             get => soTinChi;
@@ -26,6 +28,11 @@ namespace StudentManagement.Models {
         public string MaMonHoc {
             get => maMonHoc;
             set => maMonHoc = value;
+        }
+
+        public string MaNganh {
+            get => maNganh;
+            set => maNganh = value;
         }
     }
 }
