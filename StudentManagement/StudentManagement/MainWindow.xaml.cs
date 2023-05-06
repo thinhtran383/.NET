@@ -31,7 +31,7 @@ namespace StudentManagement {
         private void Button_Click(object sender, RoutedEventArgs e) {
             // check null
             if (txtUsername.Text == "" || txtPassword.Password == "") {
-                MessageBox.Show("Vui lòng nhập đầy đủ thông tin");
+                lbErr.Content = "*Vui lòng nhập đầy đủ thông tin";
                 return;
             }
 
