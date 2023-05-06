@@ -38,31 +38,6 @@ namespace StudentManagement.Control {
                 cbMaNganh.Items.Add(dataReader["MaNganh"].ToString());
             }
         }
-        private void TextChanged(object sender,TextChangedEventArgs e) {
-
-
-            if(!string.IsNullOrEmpty(txtMaHocPhan.Text)) {
-                lbErrMa.Content = "";
-            }
-
-            if(!string.IsNullOrEmpty(txtTenHocPhan.Text)) {
-                lbErrTen.Content = "";
-            }
-
-        }
-
-        private void clear() {
-            txtMaHocPhan.Text = "";
-            txtTenHocPhan.Text = "";
-            txtTinChi.Text = "";
-            cbMaNganh.SelectedIndex = -1;
-            dgCourses.SelectedIndex = -1;
-        }
-
-
-        private void btnExport_Click(object sender,RoutedEventArgs e) {
-            //  ExcelExporter.Export(dgCourses,"CourseList.xlsx");
-        }
 
         private bool IsFieldEmpty<T>(T field,Label errorLabel,string errorMessage) { // phuong thuc generic
             if(field is TextBox && string.IsNullOrEmpty((field as TextBox).Text)) {
@@ -77,6 +52,54 @@ namespace StudentManagement.Control {
             }
         }
 
+        private void TextChanged(object sender,TextChangedEventArgs e) {
+
+
+            if(!string.IsNullOrEmpty(txtMaHocPhan.Text)) {
+                lbErrMa.Content = "";
+            }
+
+            if(!string.IsNullOrEmpty(txtTenHocPhan.Text)) {
+                lbErrTen.Content = "";
+            }
+
+            if(!string.IsNullOrEmpty(txtTinChi.Text)) {
+                lbErrTin.Content = "";
+            }
+
+        }
+
+        private bool IsExists(string maHocPhan) {
+            foreach(Course course in coursesList) {
+                if(course.MaMonHoc == maHocPhan) {
+                    lbErrMa.Content = "Mã học phần đã tồn tại";
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+
+        private void clear() {
+            txtMaHocPhan.Text = "";
+            txtTenHocPhan.Text = "";
+            txtTinChi.Text = "";
+            cbMaNganh.SelectedIndex = -1;
+            dgCourses.SelectedIndex = -1;
+        }
+
+
+        private void btnExport_Click(object sender,RoutedEventArgs e) {
+            //  ExcelExporter.Export(dgCourses,"CourseList.xlsx");
+        }
+
+      
+        private void SelectionChanged(object sender,SelectionChangedEventArgs e) {
+            if(cbMaNganh.SelectedItem != null) {
+                lbErrNganh.Content = "";
+            }
+        }
 
 
 
@@ -95,16 +118,12 @@ namespace StudentManagement.Control {
                 int tinChi;
                 string maNganh = cbMaNganh.SelectedValue.ToString();
 
-                foreach(Course course in coursesList) {
-                    if(course.MaMonHoc == maHocPhan) {
-                        lbErrMa.Content = "Mã học phần đã tồn tại";
-                        return;
-                    }
-                }
+                if(IsExists(maHocPhan))
+                    return;
 
                 Regex regex = new Regex(Constant.Regex.CREDITS); // Đoạn regex kiểm tra số nguyên dương
                 if(!regex.IsMatch(txtTinChi.Text)) {
-                    lbErrTin.Content = "Vui lòng nhập số nguyên dương hợp lệ";
+                    lbErrTin.Content = "Số tín chỉ không hợp lệ";
                     return;
                 } else {
                     tinChi = int.Parse(txtTinChi.Text);
@@ -120,7 +139,6 @@ namespace StudentManagement.Control {
 
         }
 
-     
 
 
         private void btnClear_Click(object sender,RoutedEventArgs e) {
@@ -156,6 +174,9 @@ namespace StudentManagement.Control {
             string tenHocPhan = txtTenHocPhan.Text;
             string cbMaNganh = this.cbMaNganh.SelectedValue.ToString();
             int soTinChi = int.Parse(txtTinChi.Text);
+
+            if(IsExists(maHocPhan))
+                return;
 
             string sqlUpdate = $"UPDATE MonHoc SET MaNganh = '{cbMaNganh}', TenMonHoc = N'{tenHocPhan}', SoTinChi = {soTinChi} WHERE MaMonHoc = '{maHocPhan}'";
             ExecuteQuery.executeNonQuery(sqlUpdate);
