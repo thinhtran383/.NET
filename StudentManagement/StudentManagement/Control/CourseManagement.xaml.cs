@@ -14,16 +14,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DocumentFormat.OpenXml.Office2010.Drawing;
 using StudentManagement.Helper;
 using StudentManagement.Models;
 using StudentManagement.Utils;
+using System.Text.RegularExpressions;
 
-namespace StudentManagement.Control
-{
-    public partial class CourseManagement: UserControl {
+namespace StudentManagement.Control {
+    public partial class CourseManagement:UserControl {
         private ObservableCollection<Course> coursesList = DataManager.GetCourseList();
-        public CourseManagement()
-        {
+        public CourseManagement() {
             InitializeComponent();
             initNganh();
         }
@@ -34,9 +34,21 @@ namespace StudentManagement.Control
 
         private void initNganh() {
             SqlDataReader dataReader = ExecuteQuery.executeReader("select MaNganh from Nganh");
-            while (dataReader.Read()) {
+            while(dataReader.Read()) {
                 cbMaNganh.Items.Add(dataReader["MaNganh"].ToString());
             }
+        }
+        private void TextChanged(object sender,TextChangedEventArgs e) {
+
+
+            if(!string.IsNullOrEmpty(txtMaHocPhan.Text)) {
+                lbErrMa.Content = "";
+            }
+
+            if(!string.IsNullOrEmpty(txtTenHocPhan.Text)) {
+                lbErrTen.Content = "";
+            }
+
         }
 
         private void clear() {
@@ -44,11 +56,12 @@ namespace StudentManagement.Control
             txtTenHocPhan.Text = "";
             txtTinChi.Text = "";
             cbMaNganh.SelectedIndex = -1;
+            dgCourses.SelectedIndex = -1;
         }
-        
+
 
         private void btnExport_Click(object sender,RoutedEventArgs e) {
-          //  ExcelExporter.Export(dgCourses,"CourseList.xlsx");
+            //  ExcelExporter.Export(dgCourses,"CourseList.xlsx");
         }
 
         private bool IsFieldEmpty<T>(T field,Label errorLabel,string errorMessage) { // phuong thuc generic
@@ -63,8 +76,14 @@ namespace StudentManagement.Control
                 return false;
             }
         }
+
+
+
+
         private void btnAdd_Click(object sender,RoutedEventArgs e) {
             bool isError = false;
+
+
             isError |= IsFieldEmpty(txtMaHocPhan,lbErrMa,"Không được để trống phần này");
             isError |= IsFieldEmpty(txtTenHocPhan,lbErrTen,"Không được để trống phần này");
             isError |= IsFieldEmpty(txtTinChi,lbErrTin,"Không được để trống phần này");
@@ -73,8 +92,23 @@ namespace StudentManagement.Control
             if(!isError) {
                 string maHocPhan = txtMaHocPhan.Text;
                 string tenHocPhan = txtTenHocPhan.Text;
-                int tinChi = int.Parse(txtTinChi.Text);
+                int tinChi;
                 string maNganh = cbMaNganh.SelectedValue.ToString();
+
+                foreach(Course course in coursesList) {
+                    if(course.MaMonHoc == maHocPhan) {
+                        lbErrMa.Content = "Mã học phần đã tồn tại";
+                        return;
+                    }
+                }
+
+                Regex regex = new Regex(Constant.Regex.CREDITS); // Đoạn regex kiểm tra số nguyên dương
+                if(!regex.IsMatch(txtTinChi.Text)) {
+                    lbErrTin.Content = "Vui lòng nhập số nguyên dương hợp lệ";
+                    return;
+                } else {
+                    tinChi = int.Parse(txtTinChi.Text);
+                }
 
                 string sqlAdd = $"INSERT INTO MonHoc VALUES ('{maHocPhan}', '{tenHocPhan}', {tinChi}, '{maNganh}')";
                 ExecuteQuery.executeNonQuery(sqlAdd);
@@ -83,39 +117,26 @@ namespace StudentManagement.Control
                 MessageBox.Show("Thêm thành công");
                 clear();
             }
+
         }
 
-        private void TextChanged(object sender,TextChangedEventArgs e) {
-            if(!string.IsNullOrEmpty(txtMaHocPhan.Text)) {
-                lbErrMa.Content = "";
-            }
+     
 
-            if(!string.IsNullOrEmpty(txtTenHocPhan.Text)) {
-                lbErrTen.Content = "";
-            }
-
-            if(!string.IsNullOrEmpty(txtTinChi.Text)) {
-                lbErrTin.Content = "";
-            }
-        }
-
-        
-
-        private void cbMaNganh_SelectionChanged(object sender,SelectionChangedEventArgs e) {
-            if(cbMaNganh.SelectedItem != null) {
-                lbErrNganh.Content = "";
-            }
-        }
 
         private void btnClear_Click(object sender,RoutedEventArgs e) {
             clear();
         }
 
         private void btnDelete_Click(object sender,RoutedEventArgs e) {
+            if(dgCourses.SelectedItem == null) {
+                return;
+            }
+
             string maHocPhan = txtMaHocPhan.Text;
             string sqlDelete = $"DELETE FROM MonHoc WHERE MaMonHoc = '{maHocPhan}'";
+
             //MessageBox Confirm
-            MessageBoxResult result = MessageBox.Show("Bạn có chắc chắn muốn xóa không?", "Xác nhận", MessageBoxButton.YesNo);
+            MessageBoxResult result = MessageBox.Show("Bạn có chắc chắn muốn xóa không?","Xác nhận",MessageBoxButton.YesNo);
             if(result == MessageBoxResult.Yes) {
                 ExecuteQuery.executeNonQuery(sqlDelete);
                 coursesList.Remove(coursesList.Where(course => course.MaMonHoc == maHocPhan).FirstOrDefault());
@@ -123,19 +144,50 @@ namespace StudentManagement.Control
                 MessageBox.Show("Xóa thành công");
                 clear();
             }
-            
+
         }
 
         private void btnUpdate_Click(object sender,RoutedEventArgs e) {
+            if(dgCourses.SelectedItem == null) {
+                return;
+            }
+
             string maHocPhan = txtMaHocPhan.Text;
-            string sqlUpdate = $"UPDATE MonHoc SET TenMonHoc = N'{txtTenHocPhan.Text}', SoTinChi = {txtTinChi.Text}, MaNganh = '{cbMaNganh.SelectedValue.ToString()}' WHERE MaMonHoc = '{maHocPhan}'";
+            string tenHocPhan = txtTenHocPhan.Text;
+            string cbMaNganh = this.cbMaNganh.SelectedValue.ToString();
+            int soTinChi = int.Parse(txtTinChi.Text);
+
+            string sqlUpdate = $"UPDATE MonHoc SET MaNganh = '{cbMaNganh}', TenMonHoc = N'{tenHocPhan}', SoTinChi = {soTinChi} WHERE MaMonHoc = '{maHocPhan}'";
             ExecuteQuery.executeNonQuery(sqlUpdate);
-            Course course = coursesList.Where(c => c.MaMonHoc == maHocPhan).FirstOrDefault();
-            course.TenMonHoc = txtTenHocPhan.Text;
-            course.SoTinChi = int.Parse(txtTinChi.Text);
-            course.MaNganh = cbMaNganh.SelectedValue.ToString();
-            dgCourses.Items.Refresh();
+
+
+            // cap nhat lai dg
+            Course course = (Course) dgCourses.SelectedItem;
+            course.SoTinChi = soTinChi;
+            course.MaMonHoc = maHocPhan;
+            course.TenMonHoc = tenHocPhan;
+            course.MaNganh = cbMaNganh;
+
+
             MessageBox.Show("Cập nhật thành công");
+            dgCourses.Items.Refresh();
+            clear();
+        }
+
+        private void dgCourses_SelectionChanged(object sender,SelectionChangedEventArgs e) {
+            if(dgCourses.SelectedItem != null) {
+                // Lấy đối tượng Student được chọn
+                dynamic selectedStudent = dgCourses.SelectedItem;
+                string maMonHoc = selectedStudent.MaMonHoc;
+                string tenMonHoc = selectedStudent.TenMonHoc;
+                string soTinChi = (selectedStudent.SoTinChi).ToString();
+                string maNganh = selectedStudent.MaNganh;
+
+                txtMaHocPhan.Text = maMonHoc;
+                txtTenHocPhan.Text = tenMonHoc;
+                txtTinChi.Text = soTinChi;
+                cbMaNganh.Text = maNganh;
+            }
         }
     }
 }
