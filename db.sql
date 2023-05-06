@@ -1,75 +1,64 @@
-drop database SinhVienDb
+DROP DATABASE IF EXISTS SinhVienDb;
 
-create database SinhVienDb;
+CREATE DATABASE SinhVienDb;
 
-use SinhVienDb;
+USE SinhVienDb;
 
---Tạo bảng ngành
+-- Tạo bảng Nganh
 CREATE TABLE Nganh (
-MaNganh VARCHAR(10) PRIMARY KEY,
-TenNganh NVARCHAR(100) NOT NULL
+    MaNganh VARCHAR(10) PRIMARY KEY,
+    TenNganh NVARCHAR(100) NOT NULL
 );
 
-
-
---Tạo bảng MonHoc:
+-- Tạo bảng MonHoc
 CREATE TABLE MonHoc (
-MaMonHoc VARCHAR(10) PRIMARY KEY,
-TenMonHoc NVARCHAR(100) NOT NULL,
-SoTinChi INT NOT NULL,
-MaNganh VARCHAR(10) NOT NULL,
-CONSTRAINT FK_MonHoc_Nganh FOREIGN KEY (MaNganh) REFERENCES Nganh(MaNganh)
+    MaMonHoc VARCHAR(10) PRIMARY KEY,
+    TenMonHoc NVARCHAR(100) NOT NULL,
+    SoTinChi INT NOT NULL,
+    MaNganh VARCHAR(10) NOT NULL,
+    CONSTRAINT FK_MonHoc_Nganh FOREIGN KEY (MaNganh) REFERENCES Nganh(MaNganh)
 );
 
---Tạo bảng SinhVien:
+-- Tạo bảng SinhVien
 CREATE TABLE SinhVien (
-MaSinhVien VARCHAR(10) PRIMARY KEY,
-MaNganh VARCHAR(10) NOT NULL,
-TenSinhVien NVARCHAR(100) NOT NULL,
-NgaySinh Date NOT NULL,
-GioiTinh Varchar(4) NOT NULL,
-SoDienThoai Varchar(11),
-Email varchar(100),
-Khoa varchar(100)
-CONSTRAINT FK_SinhVien_Nganh FOREIGN KEY (MaNganh) REFERENCES Nganh(MaNganh)
+    MaSinhVien VARCHAR(10) PRIMARY KEY,
+    MaNganh VARCHAR(10) NOT NULL,
+    TenSinhVien NVARCHAR(100) NOT NULL,
+    NgaySinh DATE NOT NULL,
+    GioiTinh VARCHAR(4) NOT NULL,
+    SoDienThoai VARCHAR(11),
+    Email VARCHAR(100),
+    Khoa VARCHAR(100),
+    CONSTRAINT FK_SinhVien_Nganh FOREIGN KEY (MaNganh) REFERENCES Nganh(MaNganh)
 );
 
---Tạo bảng LopHoc:
-CREATE TABLE LopHoc (
-MaLopHoc VARCHAR(10) PRIMARY KEY,
-TenLopHoc NVARCHAR(100) NOT NULL,
-MaMonHoc VARCHAR(10) NOT NULL,
-MaNganh VARCHAR(10) NOT NULL,
-CONSTRAINT FK_LopHoc_MonHoc FOREIGN KEY (MaMonHoc) REFERENCES MonHoc(MaMonHoc),
-CONSTRAINT FK_LopHoc_Nganh FOREIGN KEY (MaNganh) REFERENCES Nganh(MaNganh)
-);
-
---Tạo bảng DangKi:
+-- Tạo bảng DangKi
 CREATE TABLE DangKi (
-MaSinhVien VARCHAR(10) NOT NULL,
-MaLopHoc VARCHAR(10) NOT NULL,
-SoTinChi INT NOT NULL,
-CONSTRAINT PK_DangKi PRIMARY KEY (MaSinhVien, MaLopHoc),
-CONSTRAINT FK_DangKi_SinhVien FOREIGN KEY (MaSinhVien) REFERENCES SinhVien(MaSinhVien),
-CONSTRAINT FK_DangKi_LopHoc FOREIGN KEY (MaLopHoc) REFERENCES LopHoc(MaLopHoc)
+    MaSinhVien VARCHAR(10) NOT NULL,
+    MaMonHoc VARCHAR(10) NOT NULL,
+    SoTinChi INT NOT NULL,
+    CONSTRAINT PK_DangKi PRIMARY KEY (MaSinhVien, MaMonHoc),
+    CONSTRAINT FK_DangKi_SinhVien FOREIGN KEY (MaSinhVien) REFERENCES SinhVien(MaSinhVien),
+    CONSTRAINT FK_DangKi_MonHoc FOREIGN KEY (MaMonHoc) REFERENCES MonHoc(MaMonHoc)
 );
 
---Tạo bảng Diem:
+-- Tạo bảng Diem
 CREATE TABLE Diem (
-MaSinhVien VARCHAR(10) NOT NULL,
-MaMonHoc VARCHAR(10) NOT NULL,
-Diem FLOAT NOT NULL,
-CONSTRAINT PK_Diem PRIMARY KEY (MaSinhVien, MaMonHoc),
-CONSTRAINT FK_Diem_SinhVien FOREIGN KEY (MaSinhVien) REFERENCES SinhVien(MaSinhVien),
-CONSTRAINT FK_Diem_MonHoc FOREIGN KEY (MaMonHoc) REFERENCES MonHoc(MaMonHoc)
+    MaSinhVien VARCHAR(10) NOT NULL,
+    MaMonHoc VARCHAR(10) NOT NULL,
+    Diem FLOAT NOT NULL,
+    CONSTRAINT PK_Diem PRIMARY KEY (MaSinhVien, MaMonHoc),
+    CONSTRAINT FK_Diem_SinhVien FOREIGN KEY (MaSinhVien) REFERENCES SinhVien(MaSinhVien),
+    CONSTRAINT FK_Diem_MonHoc FOREIGN KEY (MaMonHoc) REFERENCES MonHoc(MaMonHoc)
 );
 
---Tạo bảng adminaccount
-create table AdminAccount(
-	id int primary key,
-	username varchar(10),
-	password varchar(10),
-)
+-- Tạo bảng AdminAccount
+CREATE TABLE AdminAccount (
+    id INT PRIMARY KEY,
+    username VARCHAR(10),
+    password VARCHAR(10)
+);
+
 
 select * from Nganh;
 
