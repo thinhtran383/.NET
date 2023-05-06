@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 using System.Data.SqlClient;
@@ -10,23 +10,106 @@ using System.Windows.Controls;
 using StudentManagement.Helper;
 using StudentManagement.Models;
 using StudentManagement.Utils;
+using System.Text.RegularExpressions;
 
 namespace StudentManagement.Control {
 
     public partial class StudentManagement:UserControl {
         private ObservableCollection<Student> studentList = DataManager.GetStudentList();
 
+
         public StudentManagement() {
             InitializeComponent();
             initNganh();
         }
 
+      
+
+        private bool isFieldEmpty<T>(T field,Label errorLabel,string errorMessage) { // phuong thuc generic
+            if(field is TextBox && string.IsNullOrEmpty((field as TextBox).Text)) {
+                errorLabel.Content = errorMessage;
+                return true;
+            } else if(field is ComboBox && (field as ComboBox).SelectedItem == null) {
+                errorLabel.Content = errorMessage;
+                return true;
+            } else if (field is DatePicker && (field as DatePicker).SelectedDate == null) {
+                errorLabel.Content = errorMessage;
+                return true;
+            } else {
+                errorLabel.Content = "";
+                return false;
+            }
+        }
+
+        private bool isValidate(string email,string dienThoai) {
+            Regex regex = new Regex(Constant.Regex.EMAIL);
+            Regex regexPhone = new Regex(Constant.Regex.PHONE);
+            if(!regex.IsMatch(email)) {
+                lbErrEmail.Content = "Email không hợp lệ";
+                return true;
+            }
+
+            if(!regexPhone.IsMatch(dienThoai)) {
+                lbErrSo.Content = "Số điện thoại không hợp lệ";
+                return true;
+            }
+
+            return false;
+        }
+
+        private void pickNgaySinh_SelectedDateChanged(object sender,SelectionChangedEventArgs e) {
+            if(pickNgaySinh.SelectedDate != null) {
+                DateTime ngaySinh = pickNgaySinh.SelectedDate.Value;
+                lbErrNgay.Content = "";
+            }
+        }
+
+        private void SelectionChanged(object sender,SelectionChangedEventArgs e) {
+            if(cbNganh.SelectedItem != null) {
+                lbErrMaNganh.Content = "";
+               
+            }
+
+            if(cbGioiTinh.SelectedItem != null) {
+                lbErrGioitinh.Content = "";
+              
+            }
+        }
+
+        private void TextChanged(object sender,TextChangedEventArgs e) {
+            if(!string.IsNullOrEmpty(txtMaSinhVien.Text)) {
+                lbErrMa.Content = "";
+            }
+
+            if(!string.IsNullOrEmpty(txtTenSinhVien.Text)) {
+                lbErrTen.Content = "";
+            }
+
+            if(!string.IsNullOrEmpty(txtDienThoai.Text)) {
+                lbErrSo.Content = "";
+            }
+            if(!string.IsNullOrEmpty(txtEmail.Text)) {
+                lbErrEmail.Content = "";
+            }
+
+            if(!string.IsNullOrEmpty(txtKhoa.Text)) {
+                lbErrKhoa.Content = "";
+            }
+
+
+            if(!string.IsNullOrEmpty(cbGioiTinh.Text)) {
+                lbErrGioitinh.Content = "";
+            }
+        }
+
+
+
+
         private void dgStudent_Loaded(object sender,RoutedEventArgs e) {
             dgStudent.ItemsSource = studentList;
         }
 
-      
-
+        
         private void clear() {
             txtMaSinhVien.Text = "";
             cbNganh.Text = "";
@@ -48,22 +131,38 @@ namespace StudentManagement.Control {
         }
 
         private void btnAdd_Click(object sender,RoutedEventArgs e) {
-            string maSinhVien = txtMaSinhVien.Text;
-            string tenSinhVien = txtTenSinhVien.Text;
-            DateTime ngaySinh = DateTime.Parse(pickNgaySinh.Text);
-            string gioiTinh = cbGioiTinh.Text;
-            string dienThoai = txtDienThoai.Text;
-            string email = txtEmail.Text;
-            string khoa = txtKhoa.Text;
-            string maNganh = cbNganh.Text;
+            bool isError = false;
+            isError |= isFieldEmpty(txtMaSinhVien,lbErrMa,"Không được để trống phần này");
+            isError |= isFieldEmpty(txtTenSinhVien,lbErrTen,"Không được để trống phần này");
+            isError |= isFieldEmpty(txtDienThoai,lbErrSo,"Không được để trống phần này");
+            isError |= isFieldEmpty(cbNganh,lbErrMaNganh,"Không được để trống phần này");
+            isError |= isFieldEmpty(txtEmail,lbErrEmail,"Không được để trống phần này");
+            isError |= isFieldEmpty(txtKhoa,lbErrKhoa,"Không được để trống phần này");
+            isError |= isFieldEmpty(pickNgaySinh,lbErrNgay,"Không được để trống phần này");
+            isError |= isFieldEmpty(cbGioiTinh,lbErrGioitinh,"Không được để trống phần này");
+      
 
-            string sqlAdd = $"insert into SinhVien values ('{maSinhVien}', '{maNganh}', '{tenSinhVien}', '{ngaySinh}', '{gioiTinh}', '{dienThoai}', '{email}', '{khoa}' )";
+            if(!isError) {
+                string maSinhVien = txtMaSinhVien.Text;
+                string tenSinhVien = txtTenSinhVien.Text;
+                DateTime ngaySinh = DateTime.Parse(pickNgaySinh.Text);
+                string gioiTinh = cbGioiTinh.Text;
+                string dienThoai = txtDienThoai.Text;
+                string email = txtEmail.Text;
+                string khoa = txtKhoa.Text;
+                string maNganh = cbNganh.Text;
 
-            ExecuteQuery.executeNonQuery(sqlAdd);
-            studentList.Add(new Student(maSinhVien,maNganh,tenSinhVien,ngaySinh,gioiTinh,dienThoai,email,khoa));
-            dgStudent.Items.Refresh();
+                if (isValidate(email, dienThoai)) return;
 
+                string sqlAdd = $"insert into SinhVien values ('{maSinhVien}', '{maNganh}', '{tenSinhVien}', '{ngaySinh}', '{gioiTinh}', '{dienThoai}', '{email}', '{khoa}' )";
+                ExecuteQuery.executeNonQuery(sqlAdd);
+                studentList.Add(new Student(tenSinhVien,maSinhVien,maNganh,ngaySinh,gioiTinh,dienThoai,email,khoa));
+                dgStudent.Items.Refresh();
+                clear();
+            }
         }
+
+     
 
 
         private void btnUpdate_Click(object sender,RoutedEventArgs e) {
@@ -75,6 +174,9 @@ namespace StudentManagement.Control {
             string email = txtEmail.Text;
             string khoa = txtKhoa.Text;
             string maNganh = cbNganh.Text;
+
+            if(isValidate(email,dienThoai))
+                return;
 
             string sqlUpdate = $"Update SinhVien Set MaSinhVien = '{maSinhVien}', MaNganh = '{maNganh}', TenSinhVien = '{tenSinhVien}', NgaySinh = '{ngaySinh}', GioiTinh = '{gioiTinh}', SoDienThoai = '{dienThoai}', Email = '{email}', Khoa = '{khoa}' where MaSinhVien = '{maSinhVien}'";
             ExecuteQuery.executeNonQuery(sqlUpdate);
@@ -124,5 +226,10 @@ namespace StudentManagement.Control {
                 pickNgaySinh.Text = student.NgaySinh.ToString();
             }
         }
+
+       
     }
+
+
+
 }
