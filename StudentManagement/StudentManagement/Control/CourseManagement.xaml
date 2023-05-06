@@ -40,7 +40,7 @@
         <Label x:Name="lbErrTen" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="120,117,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.585,0.54"/>
         <Label x:Name="lbErrTin" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="121,173,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.169,3.321"/>
         <Label Content="Mã ngành:" HorizontalAlignment="Left" Margin="28,251,0,0" VerticalAlignment="Top" Height="29" Width="78" RenderTransformOrigin="0.132,0.385"/>
-        <ComboBox x:Name="cbMaNganh" HorizontalAlignment="Left" Margin="121,247,0,0" VerticalAlignment="Top" Width="179" />
+        <ComboBox x:Name="cbMaNganh" HorizontalAlignment="Left" Margin="121,247,0,0" VerticalAlignment="Top" Width="179" SelectionChanged="SelectionChanged" />
         <Label x:Name="lbErrNganh" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="121,231,0,0" VerticalAlignment="Top"/>
 
 

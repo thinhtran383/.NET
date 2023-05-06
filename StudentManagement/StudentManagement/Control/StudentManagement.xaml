@@ -27,16 +27,24 @@
                 <DataGridTextColumn Width="150" Header="Số điện thoại" Binding="{Binding SoDT}" />
                 <DataGridTextColumn Width="170" Header="Email" Binding="{Binding Email}" />
                 <DataGridTextColumn Header="Khoa" Binding="{Binding Khoa}" />
-                <DataGridTextColumn Header="Địa chỉ" Binding="{Binding DiaChi}" />
+               
             </DataGrid.Columns>
         </DataGrid>
-        <TextBox x:Name="txtMaSinhVien" HorizontalAlignment="Left" Margin="145,417,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="177"/>
-        <TextBox x:Name="txtTenSinhVien" HorizontalAlignment="Left" Margin="145,480,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="177"/>
-        <TextBox x:Name="txtDienThoai" HorizontalAlignment="Left" Margin="145,546,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="177" RenderTransformOrigin="0.5,0.167"/>
-        <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Margin="680,417,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="177"/>
-        <TextBox x:Name="txtKhoa" HorizontalAlignment="Left" Margin="680,546,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="177" RenderTransformOrigin="1.5,0.583"/>
-        <DatePicker x:Name="pickNgaySinh" HorizontalAlignment="Left" Margin="145,613,0,0" VerticalAlignment="Top" Width="177" RenderTransformOrigin="0.5,0.962"/>
-        <ComboBox x:Name="cbGioiTinh" HorizontalAlignment="Left" Margin="680,615,0,0" VerticalAlignment="Top" Width="177">
+        <TextBox x:Name="txtMaSinhVien" HorizontalAlignment="Left" Margin="145,417,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="177" TextChanged="TextChanged"/>
+        <TextBox x:Name="txtTenSinhVien" HorizontalAlignment="Left" Margin="145,480,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="177" TextChanged="TextChanged"/>
+        <TextBox x:Name="txtDienThoai" HorizontalAlignment="Left" Margin="145,546,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="177" RenderTransformOrigin="0.5,0.167" TextChanged="TextChanged"/>
+        <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Margin="680,417,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="177" TextChanged="TextChanged"/>
+        <TextBox x:Name="txtKhoa" HorizontalAlignment="Left" Margin="680,546,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="177" RenderTransformOrigin="1.5,0.583" TextChanged="TextChanged"/>
+        <DatePicker x:Name="pickNgaySinh" HorizontalAlignment="Left" Margin="145,613,0,0" VerticalAlignment="Top" Width="177" RenderTransformOrigin="0.5,0.962" SelectedDateChanged="pickNgaySinh_SelectedDateChanged"/>
+        <Label x:Name="lbErrMa" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="145,401,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbErrTen" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="145,464,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbErrSo" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="145,530,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbErrNgay" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="145,596,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbErrEmail" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="680,401,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbErrMaNganh" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="680,460,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbErrKhoa" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="680,530,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbErrGioitinh" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="680,596,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbGioiTinh" HorizontalAlignment="Left" Margin="680,615,0,0" VerticalAlignment="Top" Width="177" SelectionChanged="SelectionChanged">
             <ComboBoxItem>Nam</ComboBoxItem>
             <ComboBoxItem>Nu</ComboBoxItem>
 
@@ -54,6 +62,6 @@
         <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="432,696,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.981,3.333" Width="58" Click="btnDelete_Click"/>
         <Button x:Name="btnClear" Content="Clear" HorizontalAlignment="Left" Margin="594,696,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.981,3.333" Width="58" Click="btnClear_Click"/>
         <Button x:Name="btnExport" Content="Export" HorizontalAlignment="Left" Margin="756,696,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.981,3.333" Width="58" Click="btnExport_Click"/>
-        <ComboBox x:Name="cbNganh" HorizontalAlignment="Left" Margin="680,477,0,0" VerticalAlignment="Top" Width="177" />
+        <ComboBox x:Name="cbNganh" HorizontalAlignment="Left" Margin="680,477,0,0" VerticalAlignment="Top" Width="177" SelectionChanged="SelectionChanged" />
     </Grid>
 </UserControl>
