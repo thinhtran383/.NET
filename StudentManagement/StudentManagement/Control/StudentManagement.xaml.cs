@@ -1,20 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
+
 using System.Collections.ObjectModel;
-using System.Data;
+
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 using StudentManagement.Helper;
 using StudentManagement.Models;
 using StudentManagement.Utils;
@@ -37,7 +29,6 @@ namespace StudentManagement.Control {
 
         private void clear() {
             txtMaSinhVien.Text = "";
-
             cbNganh.Text = "";
             txtTenSinhVien.Text = "";
             txtDienThoai.Text = "";
@@ -57,16 +48,48 @@ namespace StudentManagement.Control {
         }
 
         private void btnAdd_Click(object sender,RoutedEventArgs e) {
-            //DateTime date = DateTime.Parse(pickNgaySinh.Text);
-            //string sqlAdd = "insert into SinhVien values('" + txtMaSinhVien.Text + "','" + cbNganh.Text + "',N'" + txtTenSinhVien.Text + "','" + date + "',N'" + cbGioiTinh.Text + "','" + txtDienThoai.Text + "','" + txtEmail.Text + "',N'" + txtKhoa.Text + "')";
-            //ExecuteQuery.executeNonQuery(sqlAdd);
-            //studentList.Add(new Student(txtMaSinhVien.Text,cbNganh.Text,txtTenSinhVien.Text,date,cbGioiTinh.Text,txtDienThoai.Text,txtEmail.Text,txtKhoa.Text));
-            //dgStudent.Items.Refresh();
-            //clear();
+            string maSinhVien = txtMaSinhVien.Text;
+            string tenSinhVien = txtTenSinhVien.Text;
+            DateTime ngaySinh = DateTime.Parse(pickNgaySinh.Text);
+            string gioiTinh = cbGioiTinh.Text;
+            string dienThoai = txtDienThoai.Text;
+            string email = txtEmail.Text;
+            string khoa = txtKhoa.Text;
+            string maNganh = cbNganh.Text;
+
+            string sqlAdd = $"insert into SinhVien values ('{maSinhVien}', '{maNganh}', '{tenSinhVien}', '{ngaySinh}', '{gioiTinh}', '{dienThoai}', '{email}', '{khoa}' )";
+
+            ExecuteQuery.executeNonQuery(sqlAdd);
+            studentList.Add(new Student(maSinhVien,maNganh,tenSinhVien,ngaySinh,gioiTinh,dienThoai,email,khoa));
+            dgStudent.Items.Refresh();
+
         }
 
 
         private void btnUpdate_Click(object sender,RoutedEventArgs e) {
+            string maSinhVien = txtMaSinhVien.Text;
+            string tenSinhVien = txtTenSinhVien.Text;
+            DateTime ngaySinh = DateTime.Parse(pickNgaySinh.Text);
+            string gioiTinh = cbGioiTinh.Text;
+            string dienThoai = txtDienThoai.Text;
+            string email = txtEmail.Text;
+            string khoa = txtKhoa.Text;
+            string maNganh = cbNganh.Text;
+
+            string sqlUpdate = $"Update SinhVien Set MaSinhVien = '{maSinhVien}', MaNganh = '{maNganh}', TenSinhVien = '{tenSinhVien}', NgaySinh = '{ngaySinh}', GioiTinh = '{gioiTinh}', SoDienThoai = '{dienThoai}', Email = '{email}', Khoa = '{khoa}' where MaSinhVien = '{maSinhVien}'";
+            ExecuteQuery.executeNonQuery(sqlUpdate);
+
+            Student student = (Student) dgStudent.SelectedItem;
+            student.MaSV = maSinhVien;
+            student.MaNganh = maNganh;
+            student.HoTen = tenSinhVien;
+            student.NgaySinh = ngaySinh;
+            student.GioiTinh = gioiTinh;
+            student.SoDT = dienThoai;
+            student.Email = email;
+            student.Khoa = khoa;
+
+            dgStudent.Items.Refresh();
 
         }
 
@@ -88,6 +111,18 @@ namespace StudentManagement.Control {
             ExcelExporter.Export(dgStudent,"studentList.xlsx");
         }
 
-
+        private void dgStudent_SelectionChanged(object sender,SelectionChangedEventArgs e) {
+            if(dgStudent.SelectedIndex != -1) {
+                Student student = (Student) dgStudent.SelectedItem;
+                txtMaSinhVien.Text = student.MaSV;
+                cbNganh.Text = student.MaNganh;
+                txtTenSinhVien.Text = student.HoTen;
+                txtDienThoai.Text = student.SoDT;
+                txtEmail.Text = student.Email;
+                txtKhoa.Text = student.Khoa;
+                cbGioiTinh.Text = student.GioiTinh;
+                pickNgaySinh.Text = student.NgaySinh.ToString();
+            }
+        }
     }
 }
