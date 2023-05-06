@@ -14,16 +14,16 @@ namespace StudentManagement.Models {
         private string soDT;
         private string email;
         private string khoa;
-        private string diaChi;
+     //   private string diaChi;
 
         public string MaSV {
             get => maSV;
             set => maSV = value;
         }
-        public string DiaChi {
-            get => diaChi;
-            set => diaChi = value;
-        }
+        //public string DiaChi {
+        //    get => diaChi;
+        //    set => diaChi = value;
+        //}
 
         public string MaNganh {
             get => maNganh;
