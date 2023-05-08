@@ -112,6 +112,7 @@ namespace StudentManagement.Control {
             isError |= IsFieldEmpty(txtTinChi,lbErrTin,"Không được để trống phần này");
             isError |= IsFieldEmpty(cbMaNganh,lbErrNganh,"Không được để trống phần này");
 
+
             if(!isError) {
                 string maHocPhan = txtMaHocPhan.Text;
                 string tenHocPhan = txtTenHocPhan.Text;
@@ -128,6 +129,7 @@ namespace StudentManagement.Control {
                 } else {
                     tinChi = int.Parse(txtTinChi.Text);
                 }
+
 
                 string sqlAdd = $"INSERT INTO MonHoc VALUES ('{maHocPhan}', '{tenHocPhan}', {tinChi}, '{maNganh}')";
                 ExecuteQuery.executeNonQuery(sqlAdd);
@@ -175,8 +177,7 @@ namespace StudentManagement.Control {
             string cbMaNganh = this.cbMaNganh.SelectedValue.ToString();
             int soTinChi = int.Parse(txtTinChi.Text);
 
-            if(IsExists(maHocPhan))
-                return;
+          
 
             string sqlUpdate = $"UPDATE MonHoc SET MaNganh = '{cbMaNganh}', TenMonHoc = N'{tenHocPhan}', SoTinChi = {soTinChi} WHERE MaMonHoc = '{maHocPhan}'";
             ExecuteQuery.executeNonQuery(sqlUpdate);
