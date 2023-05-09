@@ -46,7 +46,9 @@ CREATE TABLE DangKi (
 CREATE TABLE Diem (
     MaSinhVien VARCHAR(10) NOT NULL,
     MaMonHoc VARCHAR(10) NOT NULL,
-    Diem FLOAT NOT NULL,
+    DiemChuyenCan FLOAT NOT NULL,
+	DiemGiuaKy FLOAT NOT NULL,
+	DiemCuoiKy FLOAT NOT NULL,
     CONSTRAINT PK_Diem PRIMARY KEY (MaSinhVien, MaMonHoc),
     CONSTRAINT FK_Diem_SinhVien FOREIGN KEY (MaSinhVien) REFERENCES SinhVien(MaSinhVien),
     CONSTRAINT FK_Diem_MonHoc FOREIGN KEY (MaMonHoc) REFERENCES MonHoc(MaMonHoc)
@@ -90,46 +92,20 @@ INSERT INTO MonHoc(MaMonHoc, TenMonHoc, SoTinChi, MaNganh) VALUES
 ('ENG1001', N'Tiếng Anh cơ bản', 2, 'NgoaiNgu'),
 ('ENG1002', N'Tiếng Anh giao tiếp', 3, 'NgoaiNgu');
 
-insert into SinhVien values ('s1','CNTT','2','1-10-2022','3','4','312','12');
+
 
 INSERT INTO SinhVien(MaSinhVien, TenSinhVien, NgaySinh, GioiTinh, MaNganh) VALUES
 ('SV001', N'Nguyễn Văn A', '2000-01-01', 'Nam', 'CNTT'),
 ('SV002', N'Phạm Thị B', '2000-02-02', 'Nu', 'KinhTe'),
 ('SV003', N'Trần Văn C', '2000-03-03', 'Nu', 'NgoaiNgu');
 
-INSERT INTO LopHoc(MaLopHoc, TenLopHoc, MaMonHoc, MaNganh) VALUES
-('LT001', N'Lập trình căn bản A', 'INT1001', 'CNTT'),
-('LT002', N'Cấu trúc dữ liệu và giải thuật A', 'INT1002', 'CNTT'),
-('KT001', N'Kinh tế học đại cương A', 'ECO1001', 'KinhTe'),
-('KT002', N'Quản trị kinh doanh A', 'ECO1002', 'KinhTe'),
-('NN001', N'Tiếng Anh cơ bản A', 'ENG1001', 'NgoaiNgu'),
-('NN002', N'Tiếng Anh giao tiếp A', 'ENG1002', 'NgoaiNgu');
-
-INSERT INTO DangKi(MaSinhVien, MaLopHoc, SoTinChi) VALUES
-('SV001', 'LT001', 3),
-('SV001', 'LT002', 4),
-('SV002', 'KT001', 3),
-('SV002', 'KT002', 4),
-('SV003', 'NN001', 2),
-('SV003', 'NN002', 3);
-
-INSERT INTO Diem(MaSinhVien, MaMonHoc, Diem) VALUES
-('SV001', 'INT1001', 8.5),
-('SV001', 'INT1002', 9.0),
-('SV002', 'ECO1001', 7.5),
-('SV002', 'ECO1002', 8.0),
-('SV003', 'ENG1001', 6.5),
-('SV003', 'ENG1002', 7.0);
 
 
--- Test
-SELECT SV.MaSinhVien, SUM(MH.SoTinChi) AS TongTinChi, SUM(MH.SoTinChi)*600 AS TienHocPhi
-FROM SinhVien SV
-JOIN DangKi DK ON SV.MaSinhVien = DK.MaSinhVien
-JOIN LopHoc LH ON DK.MaLopHoc = LH.MaLopHoc
-JOIN MonHoc MH ON LH.MaMonHoc = MH.MaMonHoc
-WHERE SV.MaSinhVien = 'SV001' --thay MSV001 bằng mã sinh viên cần tìm
-GROUP BY SV.MaSinhVien;
+select * from SinhVien;
+
+update SinhVien set TenSinhVien = '12' where MaSinhVien = '1';
+
+
 
 --Trigger
 CREATE TRIGGER trgDeleteSinhVien
@@ -143,3 +119,5 @@ BEGIN
     -- Xoá các bản ghi trong bảng Diem liên quan đến sinh viên đã bị xoá
     DELETE FROM Diem WHERE MaSinhVien IN (SELECT MaSinhVien FROM deleted)
 END
+
+

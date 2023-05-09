@@ -35,7 +35,7 @@
                 <DataGridTextColumn Width="120" Header="Mã ngành" Binding="{Binding MaNganh}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <TextBox HorizontalAlignment="Left" Margin="183,14,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="177" Height="30"/>
+        <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Margin="183,14,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="177" Height="30" TextChanged="txtSearch_TextChanged"/>
         <Label x:Name="lbErrMa" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="120,63,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lbErrTen" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="120,117,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.585,0.54"/>
         <Label x:Name="lbErrTin" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="121,173,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.169,3.321"/>

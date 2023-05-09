@@ -29,8 +29,12 @@ public class ExcelExporter {
         sheets.Append(sheet);
 
         // Lấy DataTable chứa dữ liệu từ DataGrid
-        var items = dataGrid.ItemsSource.Cast<Student>().ToList();
-        var dataTable = ToDataTable(items);
+        //var items = dataGrid.ItemsSource.Cast<Student>().ToList();
+        // tong quat hon
+        var items = dataGrid.ItemsSource.Cast<object>().ToList();
+        DataTable dataTable = ToDataTable(items);
+
+        
 
 
         // Thêm các hàng và cột vào SheetData

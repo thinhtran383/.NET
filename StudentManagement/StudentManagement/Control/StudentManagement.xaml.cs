@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 using System.Data.SqlClient;
-
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -52,6 +52,17 @@ namespace StudentManagement.Control {
             if(!regexPhone.IsMatch(dienThoai)) {
                 lbErrSo.Content = "Số điện thoại không hợp lệ";
                 return true;
+            }
+
+            return false;
+        }
+
+        private bool isExits(string maSinhVien) {
+            foreach(Student student in studentList) {
+                if(student.MaSV.Equals(maSinhVien)) {
+                    lbErrMa.Content = "Mã sinh viên đã tồn tại";
+                    return true;
+                }
             }
 
             return false;
@@ -152,6 +163,8 @@ namespace StudentManagement.Control {
                 string khoa = txtKhoa.Text;
                 string maNganh = cbNganh.Text;
 
+                if (isExits(maSinhVien)) return;
+
                 if (isValidate(email, dienThoai)) return;
 
                 string sqlAdd = $"insert into SinhVien values ('{maSinhVien}', '{maNganh}', '{tenSinhVien}', '{ngaySinh}', '{gioiTinh}', '{dienThoai}', '{email}', '{khoa}' )";
@@ -175,6 +188,8 @@ namespace StudentManagement.Control {
             string khoa = txtKhoa.Text;
             string maNganh = cbNganh.Text;
 
+            
+
             if(isValidate(email,dienThoai))
                 return;
 
@@ -192,6 +207,7 @@ namespace StudentManagement.Control {
             student.Khoa = khoa;
 
             dgStudent.Items.Refresh();
+            MessageBox.Show("Cập nhật thành công");
 
         }
 
@@ -227,7 +243,14 @@ namespace StudentManagement.Control {
             }
         }
 
-       
+        private void txtSearch_TextChanged(object sender,TextChangedEventArgs e) {
+            string search = txtSearch.Text.ToLower();
+            if(search == "") {
+                dgStudent.ItemsSource = studentList;
+            } else {
+                dgStudent.ItemsSource = studentList.Where(student => student.MaSV.ToLower().Contains(search) || student.HoTen.ToLower().Contains(search) || student.MaNganh.ToLower().Contains(search) || student.SoDT.ToLower().Contains(search) || student.Email.ToLower().Contains(search) || student.Khoa.ToLower().Contains(search) || student.GioiTinh.ToLower().Contains(search) || student.NgaySinh.ToString().ToLower().Contains(search));
+            }
+        }
     }
 
 
