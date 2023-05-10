@@ -62,17 +62,6 @@ CREATE TABLE AdminAccount (
 );
 
 
-select * from Nganh;
-
-delete from Nganh
-
-select * from SinhVien;
-
-select * from Diem;
-
-delete  from SinhVien where MaSinhVien = 'SV001';
-delete from Diem where MaSinhVien ='SV001';
-DELETE FROM DangKi WHERE MaSinhVien = 'SV001'
 
 
 --Thêm dữ liệu
@@ -92,6 +81,14 @@ INSERT INTO MonHoc(MaMonHoc, TenMonHoc, SoTinChi, MaNganh) VALUES
 ('ENG1001', N'Tiếng Anh cơ bản', 2, 'NgoaiNgu'),
 ('ENG1002', N'Tiếng Anh giao tiếp', 3, 'NgoaiNgu');
 
+INSERT INTO DangKi(MaSinhVien, MaMonHoc, SoTinChi) Values
+('SV001', 'INT1001', 3),
+('SV001', 'INT1002', 4),
+('SV002', 'ECO1001', 3),
+('SV002', 'ECO1002', 4),
+('SV003', 'ENG1001', 2),
+('SV003', 'ENG1002', 3)
+
 
 
 INSERT INTO SinhVien(MaSinhVien, TenSinhVien, NgaySinh, GioiTinh, MaNganh) VALUES
@@ -99,7 +96,13 @@ INSERT INTO SinhVien(MaSinhVien, TenSinhVien, NgaySinh, GioiTinh, MaNganh) VALUE
 ('SV002', N'Phạm Thị B', '2000-02-02', 'Nu', 'KinhTe'),
 ('SV003', N'Trần Văn C', '2000-03-03', 'Nu', 'NgoaiNgu');
 
-
+INSERT INTO Diem(MaSinhVien, MaMonHoc, DiemChuyenCan, DiemGiuaKy, DiemCuoiKy) VALUES
+('SV001', 'INT1001', 9.0, 8.5, 7.0),
+('SV001', 'INT1002', 8.0, 7.5, 8.0),
+('SV002', 'ECO1001', 8.5, 7.0, 9.0),
+('SV002', 'ECO1002', 9.0, 8.0, 8.5),
+('SV003', 'ENG1001', 8.0, 7.5, 7.0),
+('SV003', 'ENG1002', 9.0, 9.0, 8.5);
 
 select * from SinhVien;
 
@@ -110,7 +113,7 @@ update SinhVien set TenSinhVien = '12' where MaSinhVien = '1';
 --Trigger
 CREATE TRIGGER trgDeleteSinhVien
 ON SinhVien
-AFTER DELETE
+INSTEAD OF DELETE
 AS
 BEGIN
     -- Xoá các bản ghi trong bảng DangKi liên quan đến sinh viên đã bị xoá
@@ -118,6 +121,70 @@ BEGIN
 
     -- Xoá các bản ghi trong bảng Diem liên quan đến sinh viên đã bị xoá
     DELETE FROM Diem WHERE MaSinhVien IN (SELECT MaSinhVien FROM deleted)
+	
+	-- Xoá các bản khi trong bảng SinhVien
+	Delete from SinhVien where MaSinhVien in (select MaSinhVien from deleted)
+
 END
 
 
+CREATE TRIGGER trg_DeleteMonHoc
+ON MonHoc
+FOR DELETE
+AS
+BEGIN
+    DELETE FROM Diem
+    WHERE MaMonHoc IN (SELECT MaMonHoc FROM deleted)
+END;
+
+
+
+
+
+
+
+DELETE FROM Diem WHERE MaMonHoc = 'ECO1001';
+Delete from DangKi where MaMonHoc = 'ECO1001';
+
+DELETE FROM MonHoc WHERE MaMonHoc = 'ECO1002';
+
+
+
+
+CREATE TRIGGER tr_DeleteMonHoc
+ON MonHoc
+INSTEAD OF DELETE
+AS
+BEGIN
+    DELETE FROM Diem
+    WHERE MaMonHoc IN (SELECT MaMonHoc FROM deleted);
+    
+    DELETE FROM DangKi
+    WHERE MaMonHoc IN (SELECT MaMonHoc FROM deleted);
+
+	delete from MonHoc
+	where MaMonHoc in (select MaMonHoc from deleted);
+END;
+
+
+
+
+
+SELECT SinhVien.MaSinhVien, MonHoc.MaMonHoc, MonHoc.TenMonHoc, Diem.DiemChuyenCan, Diem.DiemGiuaKy, Diem.DiemCuoiKy, (Diem.DiemChuyenCan * 0.1 + Diem.DiemGiuaKy * 0.4 + Diem.DiemCuoiKy * 0.5) as TongKet
+FROM SinhVien
+INNER JOIN Diem ON SinhVien.MaSinhVien = Diem.MaSinhVien
+INNER JOIN MonHoc ON Diem.MaMonHoc = MonHoc.MaMonHoc;
+
+
+delete from SinhVien
+
+delete from Diem
+
+delete from MonHoc
+
+select * from DangKi
+select * from SinhVien
+select * from Diem
+select * from MonHoc
+
+delete from SinhVien where MaSinhVien = 'SV001'
