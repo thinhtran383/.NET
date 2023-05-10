@@ -41,6 +41,17 @@ namespace StudentManagement.Control {
             }
         }
 
+        private bool isExitsEmail(string email) {
+            foreach (Student student in studentList) {
+                if(student.Email.Equals(email)) {
+                    lbErrEmail.Content = "Email đã tồn tại";
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         private bool isValidate(string email,string dienThoai) {
             Regex regex = new Regex(Constant.Regex.EMAIL);
             Regex regexPhone = new Regex(Constant.Regex.PHONE);
@@ -166,11 +177,13 @@ namespace StudentManagement.Control {
                 if (isExits(maSinhVien)) return;
 
                 if (isValidate(email, dienThoai)) return;
+                if (isExitsEmail(email)) return;
 
                 string sqlAdd = $"insert into SinhVien values ('{maSinhVien}', '{maNganh}', '{tenSinhVien}', '{ngaySinh}', '{gioiTinh}', '{dienThoai}', '{email}', '{khoa}' )";
                 ExecuteQuery.executeNonQuery(sqlAdd);
                 studentList.Add(new Student(tenSinhVien,maSinhVien,maNganh,ngaySinh,gioiTinh,dienThoai,email,khoa));
                 dgStudent.Items.Refresh();
+                MessageBox.Show("Thêm thành công");
                 clear();
             }
         }
@@ -189,7 +202,6 @@ namespace StudentManagement.Control {
             string maNganh = cbNganh.Text;
 
             
-
             if(isValidate(email,dienThoai))
                 return;
 
@@ -239,7 +251,7 @@ namespace StudentManagement.Control {
                 txtEmail.Text = student.Email;
                 txtKhoa.Text = student.Khoa;
                 cbGioiTinh.Text = student.GioiTinh;
-                pickNgaySinh.Text = student.NgaySinh.ToString();
+                pickNgaySinh.Text = student.NgaySinh.ToString("dd/MM/yyyy");
             }
         }
 

@@ -32,7 +32,8 @@ namespace StudentManagement {
                 case "Quản lý thông tin môn học":
                     contentControl.Content = new Control.CourseManagement();
                     break;
-                case "Quản lý thông tin đăng kí học":
+                case "Quản lý điểm":
+                    contentControl.Content = new Control.GradeManagement();
                     break;
                 
                 

@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="StudentManagement.Control.GradeManagement"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:StudentManagement.Control"
+             mc:Ignorable="d" 
+             d:DesignHeight="791" d:DesignWidth="900">
+    <Grid Background="White">
+        <Label  FontWeight="Medium" HorizontalAlignment="Left" Margin="18,23,0,0" VerticalAlignment="Top" FontSize="14">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/Resources/Images/magnifying-glass.png" Margin="0,0,10,0" Width="20" Height="20"/>
+                <TextBlock Text="Tìm kiếm: "/>
+            </StackPanel>
+        </Label>
+        <TextBox HorizontalAlignment="Left" Margin="122,22,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="180" RenderTransformOrigin="0.5,0.5" Height="29">
+            <TextBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.076"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBox.RenderTransform>
+        </TextBox>
+        <Label Content="Lọc:" HorizontalAlignment="Left" Margin="605,31,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbFilter" HorizontalAlignment="Left" Margin="645,23,0,0" VerticalAlignment="Top" Width="195" Height="29" SelectionChanged="cbFilter_SelectionChanged"/>
+        <DataGrid x:Name="dgGrades" AutoGenerateColumns="False"  Margin="0,86,0,341" Loaded="dgGrades_Loaded" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" SelectionChanged="dgGrades_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding MaSinhVien}" Width="120" Header="Mã sinh viên"/>
+                <DataGridTextColumn Binding="{Binding MaMonHoc}" Width="120" Header="Mã môn"/>
+                <DataGridTextColumn Binding="{Binding TenMonHoc}" Width="120" Header="Tên môn"/>
+                <DataGridTextColumn Binding="{Binding DiemChuyenCan}" Width="120" Header="Điểm chuyên cần"/>
+                <DataGridTextColumn Binding="{Binding DiemGiuaKi}" Width="120" Header="Điểm giữa kì"/>
+                <DataGridTextColumn Binding="{Binding DiemCuoiKi}" Width="120" Header="Điểm cuối kì"/>
+                <DataGridTextColumn Binding="{Binding TongKet}" Width="120" Header="Tổng kêt"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBox x:Name="txtMaSinhVien" HorizontalAlignment="Left" Margin="145,507,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" IsReadOnly="True"/>
+        <TextBox x:Name="txtTenMon" HorizontalAlignment="Left" Margin="145,565,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="220" IsReadOnly="True"/>
+        <TextBox x:Name="txtMaMon" HorizontalAlignment="Left" Margin="145,536,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="220" IsReadOnly="True"/>
+        <TextBox x:Name="txtDiemChuyenCan" HorizontalAlignment="Left" Margin="145,594,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="220"/>
+        <TextBox x:Name="txtDiemGiuaKi" HorizontalAlignment="Left" Margin="145,623,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="220"/>
+        <TextBox x:Name="txtDiemCuoiKi" HorizontalAlignment="Left" Margin="145,652,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="220"/>
+        <TextBox x:Name="txtTongKet" HorizontalAlignment="Left" Margin="145,681,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" IsReadOnly="True"/>
+        <Label Content="Mã sinh viên:" HorizontalAlignment="Left" Margin="18,511,0,0" VerticalAlignment="Top"/>
+        <Label Content="Mã môn:" HorizontalAlignment="Left" Margin="18,540,0,0" VerticalAlignment="Top"/>
+        <Label Content="Tên môn:" HorizontalAlignment="Left" Margin="18,569,0,0" VerticalAlignment="Top"/>
+        <Label Content="Điểm chuyên cần:" HorizontalAlignment="Left" Margin="18,598,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.568,2.256"/>
+        <Label Content="Điểm giữa kì:" HorizontalAlignment="Left" Margin="18,627,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.568,2.256"/>
+        <Label Content="Điểm cuối kì:" HorizontalAlignment="Left" Margin="18,656,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.568,2.256"/>
+        <Label Content="Tổng kết:" HorizontalAlignment="Left" Margin="18,685,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.568,2.256"/>
+        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="505,582,0,0" VerticalAlignment="Top" Width="65" Click="btnUpdate_Click"/>
+
+    </Grid>
+</UserControl>

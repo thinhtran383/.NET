@@ -95,10 +95,13 @@
     <Compile Include="ControlPanel.xaml.cs">
       <DependentUpon>ControlPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Control\StudentManagement.xaml.cs">
+    <Compile Include="Control\Admin\GradeManagement.xaml.cs">
+      <DependentUpon>GradeManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Admin\StudentManagement.xaml.cs">
       <DependentUpon>StudentManagement.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Control\CourseManagement.xaml.cs">
+    <Compile Include="Control\Admin\CourseManagement.xaml.cs">
       <DependentUpon>CourseManagement.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helper\DataManager.cs" />
@@ -106,6 +109,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Course.cs" />
+    <Compile Include="Models\Grade.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Utils\ExcuteQuery.cs" />
     <Compile Include="Utils\ExcelExporter.cs" />
@@ -143,11 +147,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Control\StudentManagement.xaml">
+    <Page Include="Control\Admin\GradeManagement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Control\CourseManagement.xaml">
+    <Page Include="Control\Admin\StudentManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\Admin\CourseManagement.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
