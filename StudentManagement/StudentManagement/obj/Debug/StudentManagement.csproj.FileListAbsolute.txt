@@ -42,3 +42,5 @@ C:\Users\ThinhTran\Desktop\.Net\StudentManagement\StudentManagement\bin\Debug\En
 C:\Users\ThinhTran\Desktop\.Net\StudentManagement\StudentManagement\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\ThinhTran\Desktop\.Net\StudentManagement\StudentManagement\bin\Debug\EntityFramework.xml
 C:\Users\ThinhTran\Desktop\.Net\StudentManagement\StudentManagement\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\ThinhTran\Desktop\.Net\StudentManagement\StudentManagement\obj\Debug\Control\GradeManagement.g.cs
+C:\Users\ThinhTran\Desktop\.Net\StudentManagement\StudentManagement\obj\Debug\Control\GradeManagement.baml
