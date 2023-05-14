@@ -1,19 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using StudentManagement.Helper;
 using StudentManagement.Models;
 using StudentManagement.Utils;
@@ -57,6 +48,11 @@ namespace StudentManagement.Control.Admin {
         }
 
         private void ClickImg(object sender,MouseButtonEventArgs e) {
+            if(dgEnroll.SelectedItem == null) {
+                MessageBox.Show("Vui lòng môn học cần huỷ của sinh viên","Thông báo",MessageBoxButton.OK,MessageBoxImage.Warning);
+                return;
+            }
+            
             Course selectedCourse = (Course) dgEnroll.SelectedItem;
             string maMonHoc = selectedCourse.MaMonHoc;
 
@@ -73,5 +69,46 @@ namespace StudentManagement.Control.Admin {
            
         }
 
+        private DataGrid virtualDataGrid() {
+            DataGrid dataGrid = new DataGrid();
+
+            // Tạo cột
+            dataGrid.Columns.Add(new DataGridTextColumn { Header = "Mã sinh viên",Binding = new Binding("MaSinhVien") });
+            dataGrid.Columns.Add(new DataGridTextColumn { Header = "Tên sinh viên",Binding = new Binding("TenSinhVien") });
+            dataGrid.Columns.Add(new DataGridTextColumn { Header = "Khoa",Binding = new Binding("Khoa") });
+            dataGrid.Columns.Add(new DataGridTextColumn { Header = "Mã môn học",Binding = new Binding("MaMonHoc") });
+            dataGrid.Columns.Add(new DataGridTextColumn { Header = "Tên môn học",Binding = new Binding("TenMonHoc") });
+            dataGrid.Columns.Add(new DataGridTextColumn(){Header = "Số tín chỉ", Binding = new Binding("MaMonHoc")});
+            dataGrid.Columns.Add(new DataGridTextColumn() { Header = "Mã ngành", Binding = new Binding("MaNganh")});
+
+            List<Course> exportList = new List<Course>();
+            string sql = $"select SinhVien.MaSinhVien, SinhVien.TenSinhVien, SinhVien.Khoa, DangKi.MaMonHoc, MonHoc.TenMonHoc, MonHoc.SoTinChi, MonHoc.MaNganh\r\nFrom MonHoc\r\nJoin DangKi On DangKi.MaMonHoc = MonHoc.MaMonHoc\r\nJoin SinhVien on SinhVien.MaSinhVien = DangKi.MaSinhVien";
+            SqlDataReader dataReader =  ExecuteQuery.executeReader(sql);
+            while (dataReader.Read()) { 
+                string maSinhVien = dataReader.IsDBNull(dataReader.GetOrdinal("MaSinhVien")) ? "" : dataReader.GetString(dataReader.GetOrdinal("MaSinhVien"));
+                string hoTen = dataReader.IsDBNull(dataReader.GetOrdinal("TenSinhVien")) ? "" : dataReader.GetString(dataReader.GetOrdinal("TenSinhVien"));
+                string khoa = dataReader.IsDBNull(dataReader.GetOrdinal("Khoa")) ? "" : dataReader.GetString(dataReader.GetOrdinal("Khoa"));
+                string maMonHoc = dataReader.IsDBNull(dataReader.GetOrdinal("MaMonHoc")) ? "" : dataReader.GetString(dataReader.GetOrdinal("MaMonHoc"));
+                string tenMonHoc = dataReader.IsDBNull(dataReader.GetOrdinal("TenMonHoc")) ? "" : dataReader.GetString(dataReader.GetOrdinal("TenMonHoc"));
+                int soTinChi = dataReader.IsDBNull(dataReader.GetOrdinal("SoTinChi")) ? 0 : dataReader.GetInt32(dataReader.GetOrdinal("SoTinChi"));
+                string maNganh = dataReader.IsDBNull(dataReader.GetOrdinal("MaNganh")) ? "" : dataReader.GetString(dataReader.GetOrdinal("MaNganh"));
+                exportList.Add(new Course(maSinhVien, hoTen, khoa, maMonHoc, tenMonHoc, soTinChi, maNganh));
+            }
+
+            dataGrid.ItemsSource = exportList;
+            return dataGrid;
+        }
+
+        private void btnExport_Click(object sender,RoutedEventArgs e) {
+            string defaultFileName = "exported_data";
+            string fileName = FileSaveDialog.ShowSaveDialog(defaultFileName);
+
+            
+
+            if(!string.IsNullOrEmpty(fileName)) {
+                ExcelExporter.ExportExcel(virtualDataGrid(),fileName);
+                MessageBox.Show("Dữ liệu đã được xuất thành công!","Xuất dữ liệu",MessageBoxButton.OK,MessageBoxImage.Information);
+            }
+        }
     }
 }

@@ -15,11 +15,7 @@ namespace StudentManagement.Models {
         private float diemCuoiKi;
         private float tongKet;
 
-        public Grade(string maSinhVien, string maMonHoc, string tenMonHoc) {
-            this.maSinhVien = maSinhVien;
-            this.maMonHoc = maMonHoc;
-            this.tenMonHoc = tenMonHoc;
-        }
+     
 
         public Grade(string maSinhVien, string maMonHoc, string tenMonHoc, float diemChuyenCan, float diemGiuaKi, float diemCuoiKi, float tongKet) {
             this.maSinhVien = maSinhVien;

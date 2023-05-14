@@ -217,6 +217,9 @@
   <ItemGroup>
     <Resource Include="Resources\Images\close.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Control\Student\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
