@@ -138,6 +138,10 @@ BEGIN
 END;
 
 
+delete from DangKi where MaMonHoc = 'ECO1001';
+
+select * from DangKi
+
 
 
 
@@ -190,9 +194,9 @@ select * from MonHoc
 delete from SinhVien where MaSinhVien = 'SV001'
 
 
-select DangKi.MaMonHoc, MonHoc.TenMonHoc, MonHoc.SoTinChi, MonHoc.MaNganh
+select SinhVien.MaSinhVien, SinhVien.TenSinhVien, SinhVien.Khoa, DangKi.MaMonHoc, MonHoc.TenMonHoc, MonHoc.SoTinChi, MonHoc.MaNganh
 From MonHoc
 Join DangKi On DangKi.MaMonHoc = MonHoc.MaMonHoc
-where DangKi.MaSinhVien = 'SV002'
+Join SinhVien on SinhVien.MaSinhVien = DangKi.MaSinhVien
 
 select * from DangKi
