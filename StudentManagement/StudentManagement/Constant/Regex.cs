@@ -11,6 +11,7 @@ namespace StudentManagement.Constant {
         public static string EMAIL = "^[\\w-\\.]+@st\\.phenikaa-uni\\.edu\\.vn$";
         public static string PHONE = "^[0-9]{10}$";
         public static string CREDITS = "^[1-9]\\d*$";
-    
+        public static string GRADE = "^(10(\\.0 +) ?|[0 - 9](\\.[0 - 9] +) ?)$";
+
     }
 }

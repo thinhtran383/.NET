@@ -26,8 +26,8 @@
         <Button x:Name="btnClear" Content="Clear" HorizontalAlignment="Left" Margin="223,375,0,0" VerticalAlignment="Top" Height="24" Width="55" Click="btnClear_Click"/>
         <Button x:Name="btnExport" Content="Export" HorizontalAlignment="Left" Margin="223,428,0,0" VerticalAlignment="Top" Width="55" Click="btnExport_Click"/>
         <Rectangle HorizontalAlignment="Left" Height="240" Margin="16,60,0,0" Stroke="Black" VerticalAlignment="Top" Width="295" RenderTransformOrigin="0.4,0.46"/>
-        <Rectangle HorizontalAlignment="Left" Height="730" Margin="360,62,0,0" Stroke="Black" VerticalAlignment="Top" Width="652"/>
-        <DataGrid x:Name="dgCourses"  Margin="360,62,60,0" AutoGenerateColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" Loaded="dgCourses_Loaded" SelectionChanged="dgCourses_SelectionChanged" IsReadOnly="True">
+        
+        <DataGrid x:Name="dgCourses"  Margin="380,60,30,156" AutoGenerateColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" Loaded="dgCourses_Loaded" SelectionChanged="dgCourses_SelectionChanged" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="120" Header="Mã học phần" Binding="{Binding MaMonHoc}"/>
                 <DataGridTextColumn Width="210" Header="Tên học phần" Binding="{Binding TenMonHoc}"/>

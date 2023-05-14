@@ -9,9 +9,9 @@ using StudentManagement.Utils;
 
 namespace StudentManagement.Helper {
     public class DataManager {
-        ObservableCollection<Student> studentList = new ObservableCollection<Student>();
-        ObservableCollection<Course> courseList = new ObservableCollection<Course>();
-        ObservableCollection<Grade> gradeList = new ObservableCollection<Grade>();
+        private static ObservableCollection<Student> studentList = new ObservableCollection<Student>();
+        private static ObservableCollection<Course> courseList = new ObservableCollection<Course>();
+        private static ObservableCollection<Grade> gradeList = new ObservableCollection<Grade>();
 
         private static List<Account> adminAccounts = new List<Account>();
 
@@ -24,7 +24,7 @@ namespace StudentManagement.Helper {
             initGrades();
         }
 
-        private void initGrades() {
+        private static void initGrades() {
             string sql = "\r\nSELECT SinhVien.MaSinhVien, MonHoc.MaMonHoc, MonHoc.TenMonHoc, Diem.DiemChuyenCan, Diem.DiemGiuaKy, Diem.DiemCuoiKy, (Diem.DiemChuyenCan * 0.1 + Diem.DiemGiuaKy * 0.4 + Diem.DiemCuoiKy * 0.5) as TongKet\r\nFROM SinhVien\r\nINNER JOIN Diem ON SinhVien.MaSinhVien = Diem.MaSinhVien\r\nINNER JOIN MonHoc ON Diem.MaMonHoc = MonHoc.MaMonHoc;\r\n";
             SqlDataReader dataReader = ExecuteQuery.executeReader(sql);
             while(dataReader.Read()) {
@@ -50,7 +50,7 @@ namespace StudentManagement.Helper {
             }
         }
 
-        private void initCourses() {
+        private static void initCourses() {
            SqlDataReader _dataReader = ExecuteQuery.executeReader("Select * from MonHoc");
            while (_dataReader.Read()) {
                string maMonHoc = _dataReader.IsDBNull(_dataReader.GetOrdinal("MaMonHoc")) ? "" : _dataReader.GetString(_dataReader.GetOrdinal("MaMonHoc"));
@@ -61,7 +61,7 @@ namespace StudentManagement.Helper {
            }
         }
 
-        private void initAccount() {
+        private static void initAccount() {
             SqlDataReader _dataReader = ExecuteQuery.executeReader("Select * from AdminAccount");
             while(_dataReader.Read()) {
                 string username = _dataReader.GetString(_dataReader.GetOrdinal("username"));
@@ -71,7 +71,7 @@ namespace StudentManagement.Helper {
             }
         }
 
-        private void initStudentList() {
+        private static void initStudentList() {
             SqlDataReader _dataReader = ExecuteQuery.executeReader("Select * from SinhVien");
             while(_dataReader.Read()) {
                 string maSV = _dataReader.IsDBNull(_dataReader.GetOrdinal("MaSinhVien")) ? "" : _dataReader.GetString(_dataReader.GetOrdinal("MaSinhVien"));
@@ -99,21 +99,39 @@ namespace StudentManagement.Helper {
             if(instance == null) {
                 instance = new DataManager();
             }
-            return instance.studentList;
+            return studentList;
         }
 
         public static ObservableCollection<Course> GetCourseList() {
             if(instance == null) {
                 instance = new DataManager();
             }
-            return instance.courseList;
+            return courseList;
         }
 
         public static ObservableCollection<Grade> GetGradeList() {
             if(instance == null) {
                 instance = new DataManager();
             }
-            return instance.gradeList;
+            return gradeList;
+        }
+
+        public static void RefreshALL() {
+            if(instance == null) {
+                instance = new DataManager();
+            }
+        }
+
+        public static void SetNullInstance() {
+            instance = null;
+            studentList.Clear();
+            courseList.Clear(); 
+            gradeList.Clear();
+        }
+
+        public static void ReLoadGradeList() {
+            gradeList.Clear();
+            initGrades();
         }
     }
 

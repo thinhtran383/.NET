@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using StudentManagement.Helper;
 using StudentManagement.Models;
+using System.Text.RegularExpressions;
 
 namespace StudentManagement.Control {
    
@@ -24,8 +25,17 @@ namespace StudentManagement.Control {
             cbFilter.Items.Add("Trượt");
             cbFilter.Items.Add("<None>");
             cbFilter.SelectedIndex = 3;
-
+            cbFilter.Text = "<None>";
         }
+
+        private bool isValidate(float number) {
+            Regex regex = new Regex(Constant.Regex.GRADE);
+            if (!regex.IsMatch(number.ToString())) {
+                return false;
+            }
+            return true;
+        }
+
 
 
         private void dgGrades_Loaded(object sender,RoutedEventArgs e) {
@@ -34,6 +44,7 @@ namespace StudentManagement.Control {
 
         private void dgGrades_SelectionChanged(object sender,SelectionChangedEventArgs e) {
             if (dgGrades.SelectedIndex != -1) {
+                btnUpdate.IsEnabled = true;
                 Grade selectedGrade = (Grade)dgGrades.SelectedItem;
                 string maSinhVien = selectedGrade.MaSinhVien;
                 string maMon = selectedGrade.MaMonHoc;
@@ -67,15 +78,29 @@ namespace StudentManagement.Control {
         }
 
         private void btnUpdate_Click(object sender,RoutedEventArgs e) {
+           
+
             string maSinhVien = txtMaSinhVien.Text;
             string maMon = txtMaMon.Text;
-            string tenMon = txtTenMon.Text;
             float diemChuyenCan = float.Parse(txtDiemChuyenCan.Text);
             float diemGiuaKi = float.Parse(txtDiemGiuaKi.Text);
             float diemCuoiKi = float.Parse(txtDiemCuoiKi.Text);
             float diemTongKet = diemChuyenCan * 0.1f + diemGiuaKi * 0.4f + diemCuoiKi * 0.5f;
-            
-            
+
+            if(isValidate(diemChuyenCan)) {
+                lbErrCC.Content = "Điểm chuyên cần không hợp lệ";
+                
+            }
+
+            if (isValidate(diemGiuaKi)) {
+                lbErrGK.Content = "Điểm giữa kì không hợp lệ";
+                
+            }
+
+            if (isValidate(diemCuoiKi)) {
+                lbErrCK.Content = "Điểm cuối kì không hợp lệ";
+                return;
+            }
 
             string sqlUpdate = $"Update Diem SET DiemChuyenCan = {diemChuyenCan}, DiemGiuaKy = {diemGiuaKi}, DiemCuoiKy = {diemCuoiKi} where MaSinhVien = '{maSinhVien}' and MaMonHoc = '{maMon}'";
             ExecuteQuery.executeNonQuery(sqlUpdate);
@@ -90,6 +115,32 @@ namespace StudentManagement.Control {
             dgGrades.Items.Refresh();
             MessageBox.Show("Cập nhật thành công!");
             
+        }
+
+
+        private void TextChanged(object sender,TextChangedEventArgs e) {
+            if (!string.IsNullOrEmpty(txtDiemChuyenCan.Text)) {
+                lbErrCC.Content = "";
+            }
+             
+            if(!string.IsNullOrEmpty(txtDiemGiuaKi.Text)){
+                 lbErrGK.Content = "";
+            }
+
+            if (!string.IsNullOrEmpty(txtDiemCuoiKi.Text)) {
+                lbErrCK.Content = "";
+            }
+        }
+
+        private void btnExport_Click(object sender,RoutedEventArgs e) {
+            string defaultFileName = "exported_data";
+
+            string fileName = FileSaveDialog.ShowSaveDialog(defaultFileName);
+
+            if(!string.IsNullOrEmpty(fileName)) {
+                ExcelExporter.ExportExcel(dgGrades,fileName);
+                MessageBox.Show("Dữ liệu đã được xuất thành công!","Xuất dữ liệu",MessageBoxButton.OK,MessageBoxImage.Information);
+            }
         }
     }
 }

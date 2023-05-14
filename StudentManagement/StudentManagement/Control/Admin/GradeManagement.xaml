@@ -25,7 +25,7 @@
         </TextBox>
         <Label Content="Lọc:" HorizontalAlignment="Left" Margin="605,31,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="cbFilter" HorizontalAlignment="Left" Margin="645,23,0,0" VerticalAlignment="Top" Width="195" Height="29" SelectionChanged="cbFilter_SelectionChanged"/>
-        <DataGrid x:Name="dgGrades" AutoGenerateColumns="False"  Margin="0,86,0,341" Loaded="dgGrades_Loaded" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" SelectionChanged="dgGrades_SelectionChanged">
+        <DataGrid x:Name="dgGrades" AutoGenerateColumns="False"  Margin="0,86,0,371" Loaded="dgGrades_Loaded" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" SelectionChanged="dgGrades_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding MaSinhVien}" Width="120" Header="Mã sinh viên"/>
                 <DataGridTextColumn Binding="{Binding MaMonHoc}" Width="120" Header="Mã môn"/>
@@ -36,21 +36,25 @@
                 <DataGridTextColumn Binding="{Binding TongKet}" Width="120" Header="Tổng kêt"/>
             </DataGrid.Columns>
         </DataGrid>
-        <TextBox x:Name="txtMaSinhVien" HorizontalAlignment="Left" Margin="145,507,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" IsReadOnly="True"/>
-        <TextBox x:Name="txtTenMon" HorizontalAlignment="Left" Margin="145,565,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="220" IsReadOnly="True"/>
-        <TextBox x:Name="txtMaMon" HorizontalAlignment="Left" Margin="145,536,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="220" IsReadOnly="True"/>
-        <TextBox x:Name="txtDiemChuyenCan" HorizontalAlignment="Left" Margin="145,594,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="220"/>
-        <TextBox x:Name="txtDiemGiuaKi" HorizontalAlignment="Left" Margin="145,623,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="220"/>
-        <TextBox x:Name="txtDiemCuoiKi" HorizontalAlignment="Left" Margin="145,652,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="220"/>
-        <TextBox x:Name="txtTongKet" HorizontalAlignment="Left" Margin="145,681,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" IsReadOnly="True"/>
-        <Label Content="Mã sinh viên:" HorizontalAlignment="Left" Margin="18,511,0,0" VerticalAlignment="Top"/>
-        <Label Content="Mã môn:" HorizontalAlignment="Left" Margin="18,540,0,0" VerticalAlignment="Top"/>
-        <Label Content="Tên môn:" HorizontalAlignment="Left" Margin="18,569,0,0" VerticalAlignment="Top"/>
-        <Label Content="Điểm chuyên cần:" HorizontalAlignment="Left" Margin="18,598,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.568,2.256"/>
-        <Label Content="Điểm giữa kì:" HorizontalAlignment="Left" Margin="18,627,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.568,2.256"/>
-        <Label Content="Điểm cuối kì:" HorizontalAlignment="Left" Margin="18,656,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.568,2.256"/>
-        <Label Content="Tổng kết:" HorizontalAlignment="Left" Margin="18,685,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.568,2.256"/>
-        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="505,582,0,0" VerticalAlignment="Top" Width="65" Click="btnUpdate_Click"/>
+        <TextBox x:Name="txtMaSinhVien" HorizontalAlignment="Left" Margin="145,425,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" IsReadOnly="True"/>
+        <TextBox x:Name="txtTenMon" HorizontalAlignment="Left" Margin="145,519,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="220" IsReadOnly="True"/>
+        <TextBox x:Name="txtMaMon" HorizontalAlignment="Left" Margin="145,472,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="220" IsReadOnly="True"/>
+        <TextBox x:Name="txtDiemChuyenCan" HorizontalAlignment="Left" Margin="145,566,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="220" TextChanged="TextChanged"/>
+        <TextBox x:Name="txtDiemGiuaKi" HorizontalAlignment="Left" Margin="145,613,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="220" TextChanged="TextChanged"/>
+        <TextBox x:Name="txtDiemCuoiKi" HorizontalAlignment="Left" Margin="145,660,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="220" TextChanged="TextChanged"/>
+        <TextBox x:Name="txtTongKet" HorizontalAlignment="Left" Margin="145,707,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" IsReadOnly="True"/>
+        <Label Content="Mã sinh viên:" HorizontalAlignment="Left" Margin="18,429,0,0" VerticalAlignment="Top"/>
+        <Label Content="Mã môn:" HorizontalAlignment="Left" Margin="18,476,0,0" VerticalAlignment="Top"/>
+        <Label Content="Tên môn:" HorizontalAlignment="Left" Margin="18,523,0,0" VerticalAlignment="Top"/>
+        <Label Content="Điểm chuyên cần:" HorizontalAlignment="Left" Margin="18,570,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.568,2.256"/>
+        <Label Content="Điểm giữa kì:" HorizontalAlignment="Left" Margin="18,617,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.568,2.256"/>
+        <Label Content="Điểm cuối kì:" HorizontalAlignment="Left" Margin="18,665,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.568,2.256"/>
+        <Label Content="Tổng kết:" HorizontalAlignment="Left" Margin="18,711,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.568,2.256"/>
+        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="460,618,0,0" VerticalAlignment="Top" Width="65" Click="btnUpdate_Click" IsEnabled="False"/>
+        <Label x:Name="lbErrCC" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="145,550,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbErrGK" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="145,597,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbErrCK" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="145,644,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnExport" Content="Export" HorizontalAlignment="Left" Margin="460,690,0,0" VerticalAlignment="Top" Width="65" Click="btnExport_Click"/>
 
     </Grid>
 </UserControl>

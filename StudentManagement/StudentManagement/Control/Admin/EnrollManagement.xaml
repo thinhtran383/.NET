@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="StudentManagement.Control.Admin.EnrollManagement"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:StudentManagement.Control.Admin"
+             mc:Ignorable="d" 
+             d:DesignHeight="791" Width="900">
+    <Grid Background="White">
+
+        <DataGrid x:Name="dgStudent" Margin="0,66,0,0" Loaded="dgStudent_Loaded" AutoGenerateColumns="False" HorizontalAlignment="Left" Width="194" Height="624" VerticalAlignment="Top" SelectionChanged="dgStudent_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Mã sinh viên"  Binding="{Binding MaSV}" />
+                <DataGridTextColumn Header="Tên sinh viên" Binding="{Binding HoTen}" />
+                <DataGridTextColumn Header="Khoá" Binding="{Binding Khoa}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="dgEnroll" AutoGenerateColumns="False" Margin="234,66,35,101" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Mã môn học" Width="120" Binding="{Binding MaMonHoc}"/>
+                <DataGridTextColumn Header="Tên môn học" Width="120" Binding="{Binding TenMonHoc}" />
+                <DataGridTextColumn Header="Số tín chỉ" Binding="{Binding SoTinChi }" />
+                <DataGridTextColumn Header="Mã ngành" Binding="{Binding MaNganh}" />
+                <DataGridTemplateColumn  Width="50">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="/Resources/Images/close.png" Width="20" Height="20" Cursor="Hand" MouseLeftButtonDown ="ClickImg"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

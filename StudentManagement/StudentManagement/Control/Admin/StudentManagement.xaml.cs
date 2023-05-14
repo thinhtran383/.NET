@@ -11,6 +11,8 @@ using StudentManagement.Helper;
 using StudentManagement.Models;
 using StudentManagement.Utils;
 using System.Text.RegularExpressions;
+using System.Windows;
+using Microsoft.Win32;
 
 namespace StudentManagement.Control {
 
@@ -57,15 +59,15 @@ namespace StudentManagement.Control {
             Regex regexPhone = new Regex(Constant.Regex.PHONE);
             if(!regex.IsMatch(email)) {
                 lbErrEmail.Content = "Email không hợp lệ";
-                return true;
+                return false;
             }
 
             if(!regexPhone.IsMatch(dienThoai)) {
                 lbErrSo.Content = "Số điện thoại không hợp lệ";
-                return true;
+                return false;
             }
 
-            return false;
+            return true;
         }
 
         private bool isExits(string maSinhVien) {
@@ -118,10 +120,6 @@ namespace StudentManagement.Control {
                 lbErrKhoa.Content = "";
             }
 
-
-            if(!string.IsNullOrEmpty(cbGioiTinh.Text)) {
-                lbErrGioitinh.Content = "";
-            }
         }
 
 
@@ -176,7 +174,7 @@ namespace StudentManagement.Control {
 
                 if (isExits(maSinhVien)) return;
 
-                if (isValidate(email, dienThoai)) return;
+                if (!isValidate(email, dienThoai)) return;
                 if (isExitsEmail(email)) return;
 
                 string sqlAdd = $"insert into SinhVien values ('{maSinhVien}', '{maNganh}', '{tenSinhVien}', '{ngaySinh}', '{gioiTinh}', '{dienThoai}', '{email}', '{khoa}' )";
@@ -192,6 +190,9 @@ namespace StudentManagement.Control {
 
 
         private void btnUpdate_Click(object sender,RoutedEventArgs e) {
+            Student student = (Student) dgStudent.SelectedItem;
+
+            string maSinhVienOld = student.MaSV;
             string maSinhVien = txtMaSinhVien.Text;
             string tenSinhVien = txtTenSinhVien.Text;
             DateTime ngaySinh = DateTime.Parse(pickNgaySinh.Text);
@@ -202,13 +203,13 @@ namespace StudentManagement.Control {
             string maNganh = cbNganh.Text;
 
             
-            if(isValidate(email,dienThoai))
+            if(!isValidate(email,dienThoai))
                 return;
 
-            string sqlUpdate = $"Update SinhVien Set MaSinhVien = '{maSinhVien}', MaNganh = '{maNganh}', TenSinhVien = '{tenSinhVien}', NgaySinh = '{ngaySinh}', GioiTinh = '{gioiTinh}', SoDienThoai = '{dienThoai}', Email = '{email}', Khoa = '{khoa}' where MaSinhVien = '{maSinhVien}'";
+            string sqlUpdate = $"Update SinhVien Set MaSinhVien = '{maSinhVien}', MaNganh = '{maNganh}', TenSinhVien = '{tenSinhVien}', NgaySinh = '{ngaySinh}', GioiTinh = '{gioiTinh}', SoDienThoai = '{dienThoai}', Email = '{email}', Khoa = '{khoa}' where MaSinhVien = '{maSinhVienOld}'";
             ExecuteQuery.executeNonQuery(sqlUpdate);
 
-            Student student = (Student) dgStudent.SelectedItem;
+           
             student.MaSV = maSinhVien;
             student.MaNganh = maNganh;
             student.HoTen = tenSinhVien;
@@ -220,6 +221,7 @@ namespace StudentManagement.Control {
 
             dgStudent.Items.Refresh();
             MessageBox.Show("Cập nhật thành công");
+            DataManager.ReLoadGradeList();
 
         }
 
@@ -230,6 +232,7 @@ namespace StudentManagement.Control {
                 ExecuteQuery.executeNonQuery(sqlDelete);
                 studentList.Remove((Student) dgStudent.SelectedItem);
                 dgStudent.Items.Refresh();
+                DataManager.ReLoadGradeList();
             }
         }
 
@@ -238,7 +241,14 @@ namespace StudentManagement.Control {
         }
 
         private void btnExport_Click(object sender,RoutedEventArgs e) {
-            ExcelExporter.Export(dgStudent,"studentList.xlsx");
+            string defaultFileName = "exported_data";
+
+            string fileName = FileSaveDialog.ShowSaveDialog(defaultFileName);
+
+            if(!string.IsNullOrEmpty(fileName)) {
+                ExcelExporter.ExportExcel(dgStudent,fileName);
+                MessageBox.Show("Dữ liệu đã được xuất thành công!","Xuất dữ liệu",MessageBoxButton.OK,MessageBoxImage.Information);
+            }
         }
 
         private void dgStudent_SelectionChanged(object sender,SelectionChangedEventArgs e) {

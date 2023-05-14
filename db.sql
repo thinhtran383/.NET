@@ -188,3 +188,11 @@ select * from Diem
 select * from MonHoc
 
 delete from SinhVien where MaSinhVien = 'SV001'
+
+
+select DangKi.MaMonHoc, MonHoc.TenMonHoc, MonHoc.SoTinChi, MonHoc.MaNganh
+From MonHoc
+Join DangKi On DangKi.MaMonHoc = MonHoc.MaMonHoc
+where DangKi.MaSinhVien = 'SV002'
+
+select * from DangKi

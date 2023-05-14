@@ -80,7 +80,14 @@ namespace StudentManagement.Control {
 
 
         private void btnExport_Click(object sender,RoutedEventArgs e) {
-            //  ExcelExporter.Export(dgCourses,"CourseList.xlsx");
+            string defaultFileName = "exported_data";
+
+            string fileName = FileSaveDialog.ShowSaveDialog(defaultFileName);
+
+            if(!string.IsNullOrEmpty(fileName)) {
+                ExcelExporter.ExportExcel(dgCourses,fileName);
+                MessageBox.Show("Dữ liệu đã được xuất thành công!","Xuất dữ liệu",MessageBoxButton.OK,MessageBoxImage.Information);
+            }
         }
 
       
@@ -152,6 +159,7 @@ namespace StudentManagement.Control {
                 dgCourses.Items.Refresh();
                 MessageBox.Show("Xóa thành công");
                 clear();
+                DataManager.ReLoadGradeList();
             }
 
         }
@@ -160,7 +168,9 @@ namespace StudentManagement.Control {
             if(dgCourses.SelectedItem == null) {
                 return;
             }
+            Course course = (Course) dgCourses.SelectedItem;
 
+            string maHocPhanOld = course.MaMonHoc;
             string maHocPhan = txtMaHocPhan.Text;
             string tenHocPhan = txtTenHocPhan.Text;
             string cbMaNganh = this.cbMaNganh.SelectedValue.ToString();
@@ -168,12 +178,12 @@ namespace StudentManagement.Control {
 
           
 
-            string sqlUpdate = $"UPDATE MonHoc SET MaNganh = '{cbMaNganh}', TenMonHoc = N'{tenHocPhan}', SoTinChi = {soTinChi} WHERE MaMonHoc = '{maHocPhan}'";
+            string sqlUpdate = $"UPDATE MonHoc SET MaMonHoc = '{maHocPhan}' ,MaNganh = '{cbMaNganh}', TenMonHoc = N'{tenHocPhan}', SoTinChi = {soTinChi} WHERE MaMonHoc = '{maHocPhanOld}'";
             ExecuteQuery.executeNonQuery(sqlUpdate);
 
 
             // cap nhat lai dg
-            Course course = (Course) dgCourses.SelectedItem;
+            
             course.SoTinChi = soTinChi;
             course.MaMonHoc = maHocPhan;
             course.TenMonHoc = tenHocPhan;
@@ -183,6 +193,7 @@ namespace StudentManagement.Control {
             MessageBox.Show("Cập nhật thành công");
             dgCourses.Items.Refresh();
             clear();
+            DataManager.ReLoadGradeList();
         }
 
         private void dgCourses_SelectionChanged(object sender,SelectionChangedEventArgs e) {

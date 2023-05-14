@@ -10,6 +10,7 @@
 
 
     <Grid Background="White">
+
         <Label  FontWeight="Medium" HorizontalAlignment="Left" Margin="82,19,0,0" VerticalAlignment="Top" FontSize="14">
             <StackPanel Orientation="Horizontal">
                 <Image Source="/Resources/Images/magnifying-glass.png" Margin="0,0,10,0" Width="20" Height="20"/>
@@ -17,7 +18,7 @@
             </StackPanel>
         </Label>
         <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Margin="183,14,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="177" Height="30" TextChanged="txtSearch_TextChanged"/>
-        <DataGrid AutoGenerateColumns="False"  RowHeight="30" x:Name="dgStudent"   Margin="0,60,0,433" Loaded="dgStudent_Loaded" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="True" IsReadOnly="True" SelectionChanged="dgStudent_SelectionChanged" >
+        <DataGrid AutoGenerateColumns="False"  RowHeight="30" x:Name="dgStudent"   Margin="0,85,0,408" Loaded="dgStudent_Loaded" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="True" IsReadOnly="True" SelectionChanged="dgStudent_SelectionChanged" HorizontalAlignment="Center" Width="878" >
             <DataGrid.Columns>
                 <DataGridTextColumn Width="120" Header="Mã sinh viên" Binding="{Binding MaSV}" />
                 <DataGridTextColumn Header="Mã ngành" Binding="{Binding MaNganh}" />
@@ -27,41 +28,41 @@
                 <DataGridTextColumn Width="150" Header="Số điện thoại" Binding="{Binding SoDT}" />
                 <DataGridTextColumn Width="170" Header="Email" Binding="{Binding Email}" />
                 <DataGridTextColumn Header="Khoa" Binding="{Binding Khoa}" />
-               
+
             </DataGrid.Columns>
         </DataGrid>
-        <TextBox x:Name="txtMaSinhVien" HorizontalAlignment="Left" Margin="145,417,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="177" TextChanged="TextChanged"/>
-        <TextBox x:Name="txtTenSinhVien" HorizontalAlignment="Left" Margin="145,480,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="177" TextChanged="TextChanged"/>
-        <TextBox x:Name="txtDienThoai" HorizontalAlignment="Left" Margin="145,546,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="177" RenderTransformOrigin="0.5,0.167" TextChanged="TextChanged"/>
-        <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Margin="680,417,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="177" TextChanged="TextChanged"/>
-        <TextBox x:Name="txtKhoa" HorizontalAlignment="Left" Margin="680,546,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="177" RenderTransformOrigin="1.5,0.583" TextChanged="TextChanged"/>
-        <DatePicker x:Name="pickNgaySinh" HorizontalAlignment="Left" Margin="145,613,0,0" VerticalAlignment="Top" Width="177" RenderTransformOrigin="0.5,0.962" SelectedDateChanged="pickNgaySinh_SelectedDateChanged"/>
-        <Label x:Name="lbErrMa" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="145,401,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lbErrTen" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="145,464,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lbErrSo" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="145,530,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lbErrNgay" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="145,596,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lbErrEmail" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="680,401,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lbErrMaNganh" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="680,460,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lbErrKhoa" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="680,530,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lbErrGioitinh" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="680,596,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cbGioiTinh" HorizontalAlignment="Left" Margin="680,615,0,0" VerticalAlignment="Top" Width="177" SelectionChanged="SelectionChanged">
+        <TextBox x:Name="txtMaSinhVien" HorizontalAlignment="Left" Margin="153,421,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="177" TextChanged="TextChanged"/>
+        <TextBox x:Name="txtTenSinhVien" HorizontalAlignment="Left" Margin="153,484,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="177" TextChanged="TextChanged"/>
+        <TextBox x:Name="txtDienThoai" HorizontalAlignment="Left" Margin="153,550,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="177" RenderTransformOrigin="0.5,0.167" TextChanged="TextChanged"/>
+        <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Margin="688,421,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="177" TextChanged="TextChanged"/>
+        <TextBox x:Name="txtKhoa" HorizontalAlignment="Left" Margin="688,550,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="177" RenderTransformOrigin="1.5,0.583" TextChanged="TextChanged"/>
+        <DatePicker x:Name="pickNgaySinh" HorizontalAlignment="Left" Margin="153,617,0,0" VerticalAlignment="Top" Width="177" RenderTransformOrigin="0.5,0.962" SelectedDateChanged="pickNgaySinh_SelectedDateChanged"/>
+        <Label x:Name="lbErrMa" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="153,405,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbErrTen" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="153,468,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbErrSo" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="153,534,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbErrNgay" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="153,598,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbErrEmail" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="688,405,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbErrMaNganh" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="688,464,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbErrKhoa" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="688,534,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbErrGioitinh" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="688,598,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbGioiTinh" HorizontalAlignment="Left" Margin="688,619,0,0" VerticalAlignment="Top" Width="177" SelectionChanged="SelectionChanged">
             <ComboBoxItem>Nam</ComboBoxItem>
             <ComboBoxItem>Nu</ComboBoxItem>
 
         </ComboBox>
-        <Label Content="Mã sinh viên:" FontWeight="Medium" HorizontalAlignment="Left" Margin="41,420,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <Label Content="Tên sinh viên:" FontWeight="Medium" HorizontalAlignment="Left" Margin="42,483,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <Label Content="Số điện thoại:" FontWeight="Medium" HorizontalAlignment="Left" Margin="42,550,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <Label Content="Ngày sinh:" FontWeight="Medium" HorizontalAlignment="Left" Margin="42,617,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <Label Content="Email:" FontWeight="Medium" HorizontalAlignment="Left" Margin="581,420,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.501,0.439" FontSize="14"/>
-        <Label Content="Mã ngành:" FontWeight="Medium" HorizontalAlignment="Left" Margin="581,480,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.501,0.439" FontSize="14"/>
-        <Label Content="Khoá:" FontWeight="Medium" HorizontalAlignment="Left" Margin="581,550,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.501,0.439" FontSize="14"/>
-        <Label Content="Giới tính:" FontWeight="Medium" HorizontalAlignment="Left" Margin="582,619,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.501,0.439" FontSize="14"/>
-        <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="108,696,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.981,3.333" Width="58" Click="btnAdd_Click"/>
-        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="270,696,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.981,3.333" Width="58" Click="btnUpdate_Click" />
-        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="432,696,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.981,3.333" Width="58" Click="btnDelete_Click"/>
-        <Button x:Name="btnClear" Content="Clear" HorizontalAlignment="Left" Margin="594,696,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.981,3.333" Width="58" Click="btnClear_Click"/>
-        <Button x:Name="btnExport" Content="Export" HorizontalAlignment="Left" Margin="756,696,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.981,3.333" Width="58" Click="btnExport_Click"/>
-        <ComboBox x:Name="cbNganh" HorizontalAlignment="Left" Margin="680,477,0,0" VerticalAlignment="Top" Width="177" SelectionChanged="SelectionChanged" />
+        <Label Content="Mã sinh viên:" FontWeight="Medium" HorizontalAlignment="Left" Margin="49,424,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Tên sinh viên:" FontWeight="Medium" HorizontalAlignment="Left" Margin="50,487,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Số điện thoại:" FontWeight="Medium" HorizontalAlignment="Left" Margin="50,554,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Ngày sinh:" FontWeight="Medium" HorizontalAlignment="Left" Margin="50,621,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Email:" FontWeight="Medium" HorizontalAlignment="Left" Margin="589,424,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.501,0.439" FontSize="14"/>
+        <Label Content="Mã ngành:" FontWeight="Medium" HorizontalAlignment="Left" Margin="589,484,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.501,0.439" FontSize="14"/>
+        <Label Content="Khoá:" FontWeight="Medium" HorizontalAlignment="Left" Margin="589,554,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.501,0.439" FontSize="14"/>
+        <Label Content="Giới tính:" FontWeight="Medium" HorizontalAlignment="Left" Margin="590,623,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.501,0.439" FontSize="14"/>
+        <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="116,700,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.981,3.333" Width="58" Click="btnAdd_Click"/>
+        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="278,700,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.981,3.333" Width="58" Click="btnUpdate_Click" />
+        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="440,700,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.981,3.333" Width="58" Click="btnDelete_Click"/>
+        <Button x:Name="btnClear" Content="Clear" HorizontalAlignment="Left" Margin="602,700,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.981,3.333" Width="58" Click="btnClear_Click"/>
+        <Button x:Name="btnExport" Content="Export" HorizontalAlignment="Left" Margin="764,700,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.981,3.333" Width="58" Click="btnExport_Click"/>
+        <ComboBox x:Name="cbNganh" HorizontalAlignment="Left" Margin="688,481,0,0" VerticalAlignment="Top" Width="177" SelectionChanged="SelectionChanged" />
     </Grid>
 </UserControl>

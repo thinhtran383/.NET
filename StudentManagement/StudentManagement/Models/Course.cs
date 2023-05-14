@@ -1,4 +1,4 @@
-﻿    using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +17,8 @@ namespace StudentManagement.Models {
             this.soTinChi = soTinChi;
             this.maNganh = maNganh;
         }
+
+       
         public int SoTinChi {
             get => soTinChi;
             set => soTinChi = value;

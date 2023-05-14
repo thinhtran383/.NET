@@ -5,16 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StudentManagement"
         mc:Ignorable="d"
-        ResizeMode = "NoResize"        
-        Title="ControlPanel" Height="791" Width="1300">
+             
+        Title="ControlPanel" Height="791" Width="1200">
     <Grid Margin="0,0,1,0">
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" MinWidth="788"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
 
-        <ListBox Background="AliceBlue" Grid.Column="0" x:Name="listMenu" Margin="0,304,566,0" SelectionChanged="listMenu_SelectionChanged" Loaded="listMenu_Loaded">
+
+        <ListBox Background="AliceBlue"  x:Name="listMenu" Margin="0,0,949,0" SelectionChanged="listMenu_SelectionChanged" Loaded="listMenu_Loaded">
             <ListBoxItem Height="50" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" >
                 <StackPanel Orientation="Horizontal">
                     <Image Source="Resources/Images/graduation-hat.png" Margin="0,0,10,0" Width="20" Height="20"/>
@@ -31,21 +28,23 @@
 
             <ListBoxItem Height="50" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="Resources/Images/edit (1).png" Margin="0,0,10,0" Width="20" Height="20"/>
+                    <Image Source="Resources/Images/edit (1).png" Margin="0,0,10,0" Width="26" Height="20"/>
                     <TextBlock Text="Quản lý điểm" Width="160"/>
                 </StackPanel>
             </ListBoxItem>
 
+            <ListBoxItem Height="50" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="Resources/Images/edit (1).png" Margin="0,0,10,0" Width="26" Height="20"/>
+                    <TextBlock Text="Quản lý đăng kí" Width="160"/>
+                </StackPanel>
+            </ListBoxItem>
+
+
+
+
         </ListBox>
-        <ContentControl   x:Name="contentControl" Margin="227,-10,-511,10" Grid.ColumnSpan="2">
-            <ListView d:ItemsSource="{d:SampleData ItemCount=5}" Margin="-226,9,1074,461">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn/>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </ContentControl>
+        <ContentControl   x:Name="contentControl" Margin="255,0,10,-16" Height="791"/>
         <Button Grid.Column="0" Content="Đăng xuất" HorizontalAlignment="Left" Margin="75,682,0,0" VerticalAlignment="Top" Width="72" Click="Button_Click" Height="24"/>
     </Grid>
 </Window>
