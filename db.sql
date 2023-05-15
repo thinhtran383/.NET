@@ -63,6 +63,18 @@ CREATE TABLE AdminAccount (
 
 
 
+-- Tao bang StudentAccount
+create table StudentAccount (
+	MaSinhVien varchar(10) NOT NULL,
+	username varchar(10) DEFAULT NULL,
+	password varchar(10) DEFAULT NULL,
+	PRIMARY KEY (MaSinhVien),
+	Constraint fk_StudentAccount_SinhVien Foreign key (MaSinhVien) References SinhVien(MaSinhVien) On delete cascade
+)
+
+
+
+
 
 --Thêm dữ liệu
 
@@ -91,10 +103,16 @@ INSERT INTO DangKi(MaSinhVien, MaMonHoc, SoTinChi) Values
 
 
 
-INSERT INTO SinhVien(MaSinhVien, TenSinhVien, NgaySinh, GioiTinh, MaNganh) VALUES
-('SV001', N'Nguyễn Văn A', '2000-01-01', 'Nam', 'CNTT'),
-('SV002', N'Phạm Thị B', '2000-02-02', 'Nu', 'KinhTe'),
-('SV003', N'Trần Văn C', '2000-03-03', 'Nu', 'NgoaiNgu');
+INSERT INTO SinhVien VALUES ('sv001', 'CNTT', N'Trần Văn A', '2000-01-01', 'Nam', '0987654321', 'sv1@example.com', N'Khoa Công nghệ thông tin');
+INSERT INTO SinhVien VALUES ('sv002', 'CNTT', N'Nguyễn Thị B', '2000-02-01', 'Nữ', '0987654322', 'sv2@example.com', N'Khoa Công nghệ thông tin');
+INSERT INTO SinhVien VALUES ('sv003', 'CNTT', N'Lê Văn C', '2000-03-01', 'Nam', '0987654323', 'sv3@example.com', N'Khoa Công nghệ thông tin');
+INSERT INTO SinhVien VALUES ('sv004', 'CNTT', N'Phạm Thị D', '2000-04-01', 'Nữ', '0987654324', 'sv4@example.com', N'Khoa Công nghệ thông tin');
+INSERT INTO SinhVien VALUES ('sv005', 'CNTT', N'Hoàng Văn E', '2000-05-01', 'Nam', '0987654325', 'sv5@example.com', N'Khoa Công nghệ thông tin');
+
+
+
+
+
 
 INSERT INTO Diem(MaSinhVien, MaMonHoc, DiemChuyenCan, DiemGiuaKy, DiemCuoiKy) VALUES
 ('SV001', 'INT1001', 9.0, 8.5, 7.0),
@@ -104,9 +122,10 @@ INSERT INTO Diem(MaSinhVien, MaMonHoc, DiemChuyenCan, DiemGiuaKy, DiemCuoiKy) VA
 ('SV003', 'ENG1001', 8.0, 7.5, 7.0),
 ('SV003', 'ENG1002', 9.0, 9.0, 8.5);
 
-select * from SinhVien;
+insert into StudentAccount(MaSinhVien, username, password) values 
+('SV002', 'sv2', '1'),
+('SV001', 'sv1', '1')
 
-update SinhVien set TenSinhVien = '12' where MaSinhVien = '1';
 
 
 
@@ -128,32 +147,6 @@ BEGIN
 END
 
 
-CREATE TRIGGER trg_DeleteMonHoc
-ON MonHoc
-FOR DELETE
-AS
-BEGIN
-    DELETE FROM Diem
-    WHERE MaMonHoc IN (SELECT MaMonHoc FROM deleted)
-END;
-
-
-delete from DangKi where MaMonHoc = 'ECO1001';
-
-select * from DangKi
-
-
-
-
-
-
-DELETE FROM Diem WHERE MaMonHoc = 'ECO1001';
-Delete from DangKi where MaMonHoc = 'ECO1001';
-
-DELETE FROM MonHoc WHERE MaMonHoc = 'ECO1002';
-
-
-
 
 CREATE TRIGGER tr_DeleteMonHoc
 ON MonHoc
@@ -170,10 +163,19 @@ BEGIN
 	where MaMonHoc in (select MaMonHoc from deleted);
 END;
 
+CREATE TRIGGER trg_DeleteMonHoc
+ON MonHoc
+FOR DELETE
+AS
+BEGIN
+    DELETE FROM Diem
+    WHERE MaMonHoc IN (SELECT MaMonHoc FROM deleted)
+END;
 
 
 
 
+-- Test case
 SELECT SinhVien.MaSinhVien, MonHoc.MaMonHoc, MonHoc.TenMonHoc, Diem.DiemChuyenCan, Diem.DiemGiuaKy, Diem.DiemCuoiKy, (Diem.DiemChuyenCan * 0.1 + Diem.DiemGiuaKy * 0.4 + Diem.DiemCuoiKy * 0.5) as TongKet
 FROM SinhVien
 INNER JOIN Diem ON SinhVien.MaSinhVien = Diem.MaSinhVien
@@ -200,3 +202,9 @@ Join DangKi On DangKi.MaMonHoc = MonHoc.MaMonHoc
 Join SinhVien on SinhVien.MaSinhVien = DangKi.MaSinhVien
 
 select * from DangKi
+
+select * from SinhVien
+
+select * from StudentAccount
+
+select MaSinhVien from StudentAccount where username = 'sv1';

@@ -14,14 +14,26 @@ namespace StudentManagement.Helper {
         private static ObservableCollection<Grade> gradeList = new ObservableCollection<Grade>();
 
         private static List<Account> adminAccounts = new List<Account>();
+        private static List<Account> studentAccounts = new List<Account>();
 
         private static DataManager instance = null;
 
         private DataManager() {
             initAccount();
+            initStudentAccoutn();
             initStudentList();
             initCourses();
             initGrades();
+        }
+
+        private void initStudentAccoutn() {
+            SqlDataReader _dataReader = ExecuteQuery.executeReader("Select * from StudentAccount");
+            while(_dataReader.Read()) {
+                string username = _dataReader.GetString(_dataReader.GetOrdinal("username"));
+                string password = _dataReader.GetString(_dataReader.GetOrdinal("password"));
+                Account account = new Account(username,password);
+                studentAccounts.Add(account);
+            }
         }
 
         private static void initGrades() {
@@ -29,22 +41,12 @@ namespace StudentManagement.Helper {
             SqlDataReader dataReader = ExecuteQuery.executeReader(sql);
             while(dataReader.Read()) {
                 string maSinhVien = dataReader.IsDBNull(dataReader.GetOrdinal("MaSinhVien")) ? "" : dataReader.GetString(dataReader.GetOrdinal("MaSinhVien"));
-                string maMonHoc = dataReader.IsDBNull(dataReader.GetOrdinal("MaMonHoc"))
-                    ? ""
-                    : dataReader.GetString(dataReader.GetOrdinal("MaMonHoc"));
-                string tenMonHoc = dataReader.IsDBNull(dataReader.GetOrdinal("TenMonHoc"))
-                    ? ""
-                    : dataReader.GetString(dataReader.GetOrdinal("TenMonHoc"));
+                string maMonHoc = dataReader.IsDBNull(dataReader.GetOrdinal("MaMonHoc")) ? "" : dataReader.GetString(dataReader.GetOrdinal("MaMonHoc"));
+                string tenMonHoc = dataReader.IsDBNull(dataReader.GetOrdinal("TenMonHoc")) ? "" : dataReader.GetString(dataReader.GetOrdinal("TenMonHoc"));
                 float diemChuyenCan = dataReader.IsDBNull(dataReader.GetOrdinal("DiemChuyenCan")) ? 0 : (float) dataReader.GetDouble(dataReader.GetOrdinal("DiemChuyenCan"));
-
                 float diemGiuaKy = dataReader.IsDBNull(dataReader.GetOrdinal("DiemGiuaKy")) ? 0 : (float) dataReader.GetDouble(dataReader.GetOrdinal("DiemGiuaKy"));
-
                 float diemCuoiKy = dataReader.IsDBNull(dataReader.GetOrdinal("DiemCuoiKy")) ? 0 : (float) dataReader.GetDouble(dataReader.GetOrdinal("DiemCuoiKy"));
-
-                float diemTongKet = dataReader.IsDBNull(dataReader.GetOrdinal("TongKet"))
-                    ? 0
-                    : (float)dataReader.GetDouble(dataReader.GetOrdinal("TongKet"));
-
+                float diemTongKet = dataReader.IsDBNull(dataReader.GetOrdinal("TongKet")) ? 0 : (float)dataReader.GetDouble(dataReader.GetOrdinal("TongKet"));
                 Grade grade = new Grade(maSinhVien,maMonHoc,tenMonHoc,diemChuyenCan,diemGiuaKy, diemCuoiKy,diemTongKet);
                 gradeList.Add(grade);
             }
@@ -95,6 +97,13 @@ namespace StudentManagement.Helper {
             return adminAccounts;
         }
 
+        public static List<Account> GetStudentAccounts() {
+            if(instance == null) {
+                instance = new DataManager();
+            }
+            return studentAccounts;
+        }
+
         public static ObservableCollection<Student> GetStudentList() {
             if(instance == null) {
                 instance = new DataManager();
@@ -116,11 +125,7 @@ namespace StudentManagement.Helper {
             return gradeList;
         }
 
-        public static void RefreshALL() {
-            if(instance == null) {
-                instance = new DataManager();
-            }
-        }
+      
 
         public static void SetNullInstance() {
             instance = null;

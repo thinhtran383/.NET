@@ -28,18 +28,6 @@ namespace StudentManagement.Control {
             }
         }
 
-        private bool IsFieldEmpty<T>(T field,Label errorLabel,string errorMessage) { // phuong thuc generic
-            if(field is TextBox && string.IsNullOrEmpty((field as TextBox).Text)) {
-                errorLabel.Content = errorMessage;
-                return true;
-            } else if(field is ComboBox && (field as ComboBox).SelectedItem == null) {
-                errorLabel.Content = errorMessage;
-                return true;
-            } else {
-                errorLabel.Content = "";
-                return false;
-            }
-        }
 
         private void TextChanged(object sender,TextChangedEventArgs e) {
 
@@ -103,10 +91,10 @@ namespace StudentManagement.Control {
             bool isError = false;
 
 
-            isError |= IsFieldEmpty(txtMaHocPhan,lbErrMa,"Không được để trống phần này");
-            isError |= IsFieldEmpty(txtTenHocPhan,lbErrTen,"Không được để trống phần này");
-            isError |= IsFieldEmpty(txtTinChi,lbErrTin,"Không được để trống phần này");
-            isError |= IsFieldEmpty(cbMaNganh,lbErrNganh,"Không được để trống phần này");
+            isError |= CheckValid.isFieldEmpty(txtMaHocPhan,lbErrMa,"Không được để trống phần này");
+            isError |= CheckValid.isFieldEmpty(txtTenHocPhan,lbErrTen,"Không được để trống phần này");
+            isError |= CheckValid.isFieldEmpty(txtTinChi,lbErrTin,"Không được để trống phần này");
+            isError |= CheckValid.isFieldEmpty(cbMaNganh,lbErrNganh,"Không được để trống phần này");
 
 
             if(!isError) {

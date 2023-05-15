@@ -140,5 +140,16 @@ namespace StudentManagement.Control {
                 MessageBox.Show("Dữ liệu đã được xuất thành công!","Xuất dữ liệu",MessageBoxButton.OK,MessageBoxImage.Information);
             }
         }
+
+        private void txtSearch_TextChanged(object sender,TextChangedEventArgs e) {
+            string search = txtSearch.Text.ToLower();
+
+            if (search.Equals("")) dgGrades.ItemsSource = grades;
+            else {
+                dgGrades.ItemsSource = grades.Where(grade =>
+                    grade.MaSinhVien.ToLower().Contains(search) || grade.MaMonHoc.ToLower().Contains(search) ||
+                    grade.TenMonHoc.ToLower().Contains(search));
+            }
+        }
     }
 }

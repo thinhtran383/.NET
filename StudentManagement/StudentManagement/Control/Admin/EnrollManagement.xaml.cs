@@ -14,7 +14,7 @@ namespace StudentManagement.Control.Admin {
     /// Interaction logic for EnrollManagement.xaml
     /// </summary>
     public partial class EnrollManagement:UserControl {
-        private ObservableCollection<Student> studensList = DataManager.GetStudentList();
+        private ObservableCollection<Models.Student> studensList = DataManager.GetStudentList();
         private ObservableCollection<Course> coursesList = new ObservableCollection<Course>();
 
         public EnrollManagement() {
@@ -28,7 +28,7 @@ namespace StudentManagement.Control.Admin {
 
 
         private void dgStudent_SelectionChanged(object sender,SelectionChangedEventArgs e) {
-            Student student = (Student) dgStudent.SelectedItem;
+            Models.Student student = (Models.Student) dgStudent.SelectedItem;
             string maSinhVien = student.MaSV;
 
             string sql = $"select DangKi.MaMonHoc, MonHoc.TenMonHoc, MonHoc.SoTinChi, MonHoc.MaNganh\r\nFrom MonHoc\r\nJoin DangKi On DangKi.MaMonHoc = MonHoc.MaMonHoc\r\nwhere DangKi.MaSinhVien = '{maSinhVien}'";

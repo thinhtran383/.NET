@@ -1,84 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-
 using System.Data.SqlClient;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-
 using StudentManagement.Helper;
-using StudentManagement.Models;
 using StudentManagement.Utils;
-using System.Text.RegularExpressions;
-using System.Windows;
-using Microsoft.Win32;
 
 namespace StudentManagement.Control {
 
     public partial class StudentManagement:UserControl {
-        private ObservableCollection<Student> studentList = DataManager.GetStudentList();
-
+        private ObservableCollection<Models.Student> studentList = DataManager.GetStudentList();
 
         public StudentManagement() {
             InitializeComponent();
             initNganh();
         }
 
-      
-
-        private bool isFieldEmpty<T>(T field,Label errorLabel,string errorMessage) { // phuong thuc generic
-            if(field is TextBox && string.IsNullOrEmpty((field as TextBox).Text)) {
-                errorLabel.Content = errorMessage;
-                return true;
-            } else if(field is ComboBox && (field as ComboBox).SelectedItem == null) {
-                errorLabel.Content = errorMessage;
-                return true;
-            } else if (field is DatePicker && (field as DatePicker).SelectedDate == null) {
-                errorLabel.Content = errorMessage;
-                return true;
-            } else {
-                errorLabel.Content = "";
-                return false;
+        private void initNganh() {
+            SqlDataReader dataReader = ExecuteQuery.executeReader("select MaNganh from Nganh");
+            while(dataReader.Read()) {
+                cbNganh.Items.Add(dataReader["MaNganh"].ToString());
             }
-        }
-
-        private bool isExitsEmail(string email) {
-            foreach (Student student in studentList) {
-                if(student.Email.Equals(email)) {
-                    lbErrEmail.Content = "Email đã tồn tại";
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        private bool isValidate(string email,string dienThoai) {
-            Regex regex = new Regex(Constant.Regex.EMAIL);
-            Regex regexPhone = new Regex(Constant.Regex.PHONE);
-            if(!regex.IsMatch(email)) {
-                lbErrEmail.Content = "Email không hợp lệ";
-                return false;
-            }
-
-            if(!regexPhone.IsMatch(dienThoai)) {
-                lbErrSo.Content = "Số điện thoại không hợp lệ";
-                return false;
-            }
-
-            return true;
-        }
-
-        private bool isExits(string maSinhVien) {
-            foreach(Student student in studentList) {
-                if(student.MaSV.Equals(maSinhVien)) {
-                    lbErrMa.Content = "Mã sinh viên đã tồn tại";
-                    return true;
-                }
-            }
-
-            return false;
         }
 
         private void pickNgaySinh_SelectedDateChanged(object sender,SelectionChangedEventArgs e) {
@@ -89,15 +32,20 @@ namespace StudentManagement.Control {
         }
 
         private void SelectionChanged(object sender,SelectionChangedEventArgs e) {
-            if(cbNganh.SelectedItem != null) {
-                lbErrMaNganh.Content = "";
-               
+            CheckValid.isSelected(cbNganh,lbErrMaNganh);
+            CheckValid.isSelected(cbGioiTinh, lbErrGioitinh);
+        }
+
+
+        private bool isExists(string maSinhVien) {
+            foreach(Models.Student student in studentList) {
+                if(student.MaSV.Equals(maSinhVien)) {
+                    lbErrMa.Content = "Mã sinh viên đã tồn tại";
+                    return true;
+                }
             }
 
-            if(cbGioiTinh.SelectedItem != null) {
-                lbErrGioitinh.Content = "";
-              
-            }
+            return false;
         }
 
         private void TextChanged(object sender,TextChangedEventArgs e) {
@@ -123,8 +71,6 @@ namespace StudentManagement.Control {
         }
 
 
-
-
         private void dgStudent_Loaded(object sender,RoutedEventArgs e) {
             dgStudent.ItemsSource = studentList;
         }
@@ -140,26 +86,20 @@ namespace StudentManagement.Control {
             cbGioiTinh.Text = "";
             pickNgaySinh.Text = "";
             dgStudent.SelectedIndex = -1;
-
         }
 
-        private void initNganh() {
-            SqlDataReader dataReader = ExecuteQuery.executeReader("select MaNganh from Nganh");
-            while(dataReader.Read()) {
-                cbNganh.Items.Add(dataReader["MaNganh"].ToString());
-            }
-        }
+      
 
         private void btnAdd_Click(object sender,RoutedEventArgs e) {
             bool isError = false;
-            isError |= isFieldEmpty(txtMaSinhVien,lbErrMa,"Không được để trống phần này");
-            isError |= isFieldEmpty(txtTenSinhVien,lbErrTen,"Không được để trống phần này");
-            isError |= isFieldEmpty(txtDienThoai,lbErrSo,"Không được để trống phần này");
-            isError |= isFieldEmpty(cbNganh,lbErrMaNganh,"Không được để trống phần này");
-            isError |= isFieldEmpty(txtEmail,lbErrEmail,"Không được để trống phần này");
-            isError |= isFieldEmpty(txtKhoa,lbErrKhoa,"Không được để trống phần này");
-            isError |= isFieldEmpty(pickNgaySinh,lbErrNgay,"Không được để trống phần này");
-            isError |= isFieldEmpty(cbGioiTinh,lbErrGioitinh,"Không được để trống phần này");
+            isError |= CheckValid.isFieldEmpty(txtMaSinhVien,lbErrMa,"Không được để trống phần này");
+            isError |= CheckValid.isFieldEmpty(txtTenSinhVien,lbErrTen,"Không được để trống phần này");
+            isError |= CheckValid.isFieldEmpty(txtDienThoai,lbErrSo,"Không được để trống phần này");
+            isError |= CheckValid.isFieldEmpty(cbNganh,lbErrMaNganh,"Không được để trống phần này");
+            isError |= CheckValid.isFieldEmpty(txtEmail,lbErrEmail,"Không được để trống phần này");
+            isError |= CheckValid.isFieldEmpty(txtKhoa,lbErrKhoa,"Không được để trống phần này");
+            isError |= CheckValid.isFieldEmpty(pickNgaySinh,lbErrNgay,"Không được để trống phần này");
+            isError |= CheckValid.isFieldEmpty(cbGioiTinh,lbErrGioitinh,"Không được để trống phần này");
       
 
             if(!isError) {
@@ -172,14 +112,14 @@ namespace StudentManagement.Control {
                 string khoa = txtKhoa.Text;
                 string maNganh = cbNganh.Text;
 
-                if (isExits(maSinhVien)) return;
+                if (isExists(maSinhVien)) return;
 
-                if (!isValidate(email, dienThoai)) return;
-                if (isExitsEmail(email)) return;
+                if (!CheckValid.isValidate(email, dienThoai, lbErrSo, lbErrEmail)) return;
+                if (CheckValid.isExitsEmail(email, studentList, lbErrEmail)) return;
 
                 string sqlAdd = $"insert into SinhVien values ('{maSinhVien}', '{maNganh}', '{tenSinhVien}', '{ngaySinh}', '{gioiTinh}', '{dienThoai}', '{email}', '{khoa}' )";
                 ExecuteQuery.executeNonQuery(sqlAdd);
-                studentList.Add(new Student(tenSinhVien,maSinhVien,maNganh,ngaySinh,gioiTinh,dienThoai,email,khoa));
+                studentList.Add(new Models.Student(tenSinhVien,maSinhVien,maNganh,ngaySinh,gioiTinh,dienThoai,email,khoa));
                 dgStudent.Items.Refresh();
                 MessageBox.Show("Thêm thành công");
                 clear();
@@ -190,7 +130,7 @@ namespace StudentManagement.Control {
 
 
         private void btnUpdate_Click(object sender,RoutedEventArgs e) {
-            Student student = (Student) dgStudent.SelectedItem;
+            Models.Student student = (Models.Student) dgStudent.SelectedItem;
 
             string maSinhVienOld = student.MaSV;
             string maSinhVien = txtMaSinhVien.Text;
@@ -203,8 +143,7 @@ namespace StudentManagement.Control {
             string maNganh = cbNganh.Text;
 
             
-            if(!isValidate(email,dienThoai))
-                return;
+            if(!CheckValid.isValidate(email,dienThoai,lbErrSo,lbErrEmail)) return;
 
             string sqlUpdate = $"Update SinhVien Set MaSinhVien = '{maSinhVien}', MaNganh = '{maNganh}', TenSinhVien = '{tenSinhVien}', NgaySinh = '{ngaySinh}', GioiTinh = '{gioiTinh}', SoDienThoai = '{dienThoai}', Email = '{email}', Khoa = '{khoa}' where MaSinhVien = '{maSinhVienOld}'";
             ExecuteQuery.executeNonQuery(sqlUpdate);
@@ -227,10 +166,10 @@ namespace StudentManagement.Control {
 
         private void btnDelete_Click(object sender,RoutedEventArgs e) {
             if(MessageBox.Show("Bạn có chắc muốn xoá?","Xác nhận xoá",MessageBoxButton.YesNo) == MessageBoxResult.Yes) {
-                string selectedId = ((Student) dgStudent.SelectedItem).MaSV;
+                string selectedId = ((Models.Student) dgStudent.SelectedItem).MaSV;
                 string sqlDelete = "delete from SinhVien where MaSinhVien = '" + selectedId + "'";
                 ExecuteQuery.executeNonQuery(sqlDelete);
-                studentList.Remove((Student) dgStudent.SelectedItem);
+                studentList.Remove((Models.Student) dgStudent.SelectedItem);
                 dgStudent.Items.Refresh();
                 DataManager.ReLoadGradeList();
             }
@@ -253,7 +192,7 @@ namespace StudentManagement.Control {
 
         private void dgStudent_SelectionChanged(object sender,SelectionChangedEventArgs e) {
             if(dgStudent.SelectedIndex != -1) {
-                Student student = (Student) dgStudent.SelectedItem;
+                Models.Student student = (Models.Student) dgStudent.SelectedItem;
                 txtMaSinhVien.Text = student.MaSV;
                 cbNganh.Text = student.MaNganh;
                 txtTenSinhVien.Text = student.HoTen;
@@ -274,7 +213,5 @@ namespace StudentManagement.Control {
             }
         }
     }
-
-
 
 }

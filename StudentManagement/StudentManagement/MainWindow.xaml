@@ -6,24 +6,24 @@
         xmlns:local="clr-namespace:StudentManagement"
         ResizeMode="NoResize"
         mc:Ignorable="d"
-        Title="MainWindow" Height="327" Width="493">
+        Title="Login" Height="327" Width="493"
+        Icon="Resources/Images/ic_launcher.png">
     <Grid Background="#2b579a">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="43*"/>
-            <ColumnDefinition Width="204*"/>
-        </Grid.ColumnDefinitions>
 
-        <Label Content="Username:" Foreground ="White"  HorizontalAlignment="Left" Margin="32,130,0,0" VerticalAlignment="Top" FontSize="16" Height="32" Width="85" Grid.ColumnSpan="2"/>
-        <Label Content="Password:" Foreground ="White" HorizontalAlignment="Left" Margin="34,197,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.477,0.586" FontSize="16" Height="32" Width="80" Grid.ColumnSpan="2"/>
+
+        <Label Content="Username:" Foreground ="White"  HorizontalAlignment="Left" Margin="32,144,0,0" VerticalAlignment="Top" FontSize="16" Height="32" Width="85"/>
+        <Label Content="Password:" Foreground ="White" HorizontalAlignment="Left" Margin="34,206,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.477,0.586" FontSize="16" Height="32" Width="80"/>
         <Label Content="Welcome To" Foreground ="White" FontWeight ="Light" HorizontalAlignment="Left" Margin="13,11,0,0" VerticalAlignment="Top" FontSize="48" RenderTransformOrigin="0.377,0.317" Height="74" Width="254" Grid.ColumnSpan="2"/>
         <Label Content="Student Management" Foreground ="White" FontWeight="thin" HorizontalAlignment="Left" Margin="18,64,0,0" VerticalAlignment="Top" FontSize="24" RenderTransformOrigin="0.378,0.247" Height="42" Width="228" Grid.Column="1"/>
-        <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Margin="48,133,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="292" Height="26" Grid.Column="1"/>
-        <Button Content="Login" HorizontalAlignment="Left" Margin="250,244,0,0" VerticalAlignment="Top" Width="89" Height="28" Click="Button_Click" IsDefault="True" Grid.Column="1"/>
-        <PasswordBox  x:Name="txtPassword" HorizontalAlignment="Left" Margin="48,199,0,0" VerticalAlignment="Top" Width="292" Grid.Column="1"/>
-        <TextBox Name="passwordUnmark" Visibility="Hidden" HorizontalAlignment="Left" Margin="48,199,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="292" Grid.Column="1"/>
-        <Image HorizontalAlignment="Left" Height="0" Margin="316,191,0,0" VerticalAlignment="Top" Width="7" Grid.Column="1"/>
-        <TextBlock Foreground="Gray" Text="Show"  Name="showPassword" HorizontalAlignment="Left" Margin="302,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="32" MouseLeftButtonDown="showPassword_MouseLeftButtonDown" Grid.Column="1"/>
-        <Label Foreground="Red" FontWeight="Light" x:Name="lbErr" Grid.Column="1" Content="" HorizontalAlignment="Left" Margin="48,111,0,0" VerticalAlignment="Top" Width="231"/>
+        <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Margin="148,147,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="292" Height="26"/>
+        <Button Content="Login" HorizontalAlignment="Left" Margin="250,253,0,0" VerticalAlignment="Top" Width="89" Height="28" Click="Button_Click" IsDefault="True" />
+        <PasswordBox  x:Name="txtPassword" HorizontalAlignment="Left" Margin="148,205,0,0" VerticalAlignment="Top" Width="292"/>
+        <TextBox Name="passwordUnmark" Visibility="Hidden" HorizontalAlignment="Left" Margin="148,205,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="292" />
+        <Image HorizontalAlignment="Left" Height="0" Margin="316,200,0,0" VerticalAlignment="Top" Width="7"/>
+        <TextBlock Foreground="Gray" Text="Show"  Name="showPassword" HorizontalAlignment="Left" Margin="403,209,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="32" MouseLeftButtonDown="showPassword_MouseLeftButtonDown"/>
+        <Label Foreground="Red" FontWeight="Light" x:Name="lbErr" Content="" HorizontalAlignment="Left" Margin="154,184,0,0" VerticalAlignment="Top" Width="231"/>
+        <Label Content="Role:" Foreground ="White"  HorizontalAlignment="Left" Margin="34,103,0,0" VerticalAlignment="Top" FontSize="16" Height="32" Width="85"/>
+        <ComboBox x:Name="cbRole" HorizontalAlignment="Left" Margin="149,102,0,0" VerticalAlignment="Top" Width="291"/>
 
 
 
