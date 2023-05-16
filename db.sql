@@ -72,6 +72,22 @@ create table StudentAccount (
 	Constraint fk_StudentAccount_SinhVien Foreign key (MaSinhVien) References SinhVien(MaSinhVien) On delete cascade
 )
 
+-- Tao bang pending
+
+create table Pending(
+	MaSinhVien varchar(10),
+	TenSinhVien Nvarchar(100),
+	GioiTinh varchar(10),
+	Khoa varchar(10),
+	MaNganh varchar(10),
+	NgayTaoYeuCau Date Default GetDate(),
+	primary key(MaSinhVien)
+)
+
+select * from Pending
+
+
+
 
 
 

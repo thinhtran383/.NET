@@ -39,6 +39,7 @@
         </StackPanel>
         <DataGrid x:Name="dgGrade" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,208,0,56" Loaded="dgGrade_Loaded"/>
         <Button x:Name="btnUpdateInfo" Content="Cập nhật thông tin" HorizontalAlignment="Left" Margin="665,5,0,0" VerticalAlignment="Top" Click="btnUpdateInfo_Click"/>
+        <Button x:Name="btnExport" Content="Export" HorizontalAlignment="Left" Margin="348,383,0,0" VerticalAlignment="Top" Click="btnExport_Click"/>
 
     </Grid>
 </Window>

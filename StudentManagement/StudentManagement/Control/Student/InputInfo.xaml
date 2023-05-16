@@ -12,12 +12,12 @@
         <TextBox x:Name="txtDienThoai" HorizontalAlignment="Left" Margin="129,191,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="163" RenderTransformOrigin="0.5,0.167" />
         <TextBox x:Name="txtKhoa" HorizontalAlignment="Left" Margin="606,190,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="163" RenderTransformOrigin="1.5,0.583" />
         <DatePicker x:Name="pickNgaySinh" HorizontalAlignment="Left" Margin="129,256,0,0" VerticalAlignment="Top" Width="163" RenderTransformOrigin="0.5,0.962" />
-        <Label x:Name="lbErrTen" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="129,104,0,0" VerticalAlignment="Top" Width="64"/>
-        <Label x:Name="lbErrSo" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="129,174,0,0" VerticalAlignment="Top" Width="64"/>
-        <Label x:Name="lbErrNgay" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="129,238,0,0" VerticalAlignment="Top" Width="64"/>
-        <Label x:Name="lbErrMaNganh" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="606,104,0,0" VerticalAlignment="Top" Width="64"/>
-        <Label x:Name="lbErrKhoa" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="606,169,0,0" VerticalAlignment="Top" Width="64"/>
-        <Label x:Name="lbErrGioitinh" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="606,238,0,0" VerticalAlignment="Top" Width="64"/>
+        <Label x:Name="lbErrTen" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="129,104,0,0" VerticalAlignment="Top" Width="112"/>
+        <Label x:Name="lbErrSo" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="129,174,0,0" VerticalAlignment="Top" Width="112"/>
+        <Label x:Name="lbErrNgay" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="129,238,0,0" VerticalAlignment="Top" Width="112"/>
+        <Label x:Name="lbErrMaNganh" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="606,104,0,0" VerticalAlignment="Top" Width="109"/>
+        <Label x:Name="lbErrKhoa" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="606,169,0,0" VerticalAlignment="Top" Width="109"/>
+        <Label x:Name="lbErrGioitinh" Foreground="Red" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="606,238,0,0" VerticalAlignment="Top" Width="109"/>
         <ComboBox x:Name="cbGioiTinh" HorizontalAlignment="Left" Margin="606,259,0,0" VerticalAlignment="Top" Width="163" >
             <ComboBoxItem Content="Nam"/>
             <ComboBoxItem Content="Nu"/>
@@ -30,7 +30,7 @@
         <Label Content="Khoá:" FontWeight="Medium" HorizontalAlignment="Left" Margin="506,194,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.501,0.439" FontSize="14" Width="41"/>
         <Label Content="Giới tính:" FontWeight="Medium" HorizontalAlignment="Left" Margin="506,263,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.501,0.439" FontSize="14" Width="63"/>
         <ComboBox x:Name="cbNganh" HorizontalAlignment="Left" Margin="606,121,0,0" VerticalAlignment="Top" Width="163"  />
-        <Button x:Name="btnOk" Content="OK" HorizontalAlignment="Center" Margin="0,361,0,0" VerticalAlignment="Top" Width="64"/>
+        <Button x:Name="btnOk" Content="OK" HorizontalAlignment="Center" Margin="0,361,0,0" VerticalAlignment="Top" Width="64" Click="btnOk_Click"/>
 
     </Grid>
 </Window>

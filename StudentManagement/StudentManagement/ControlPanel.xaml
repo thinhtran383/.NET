@@ -41,6 +41,13 @@
                 </StackPanel>
             </ListBoxItem>
 
+            <ListBoxItem Height="50" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="Resources/Images/edit (1).png" Margin="0,0,10,0" Width="26" Height="20"/>
+                    <TextBlock Text="Thông báo" Width="160"/>
+                </StackPanel>
+            </ListBoxItem>
+
 
 
 

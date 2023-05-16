@@ -27,7 +27,9 @@ namespace StudentManagement {
                 case "Quản lý đăng kí":
                     contentControl.Content = new Control.Admin.EnrollManagement();
                     break;
-
+                case "Thông báo":
+                    contentControl.Content = new Control.Admin.Notification();
+                    break;
 
             }
         }

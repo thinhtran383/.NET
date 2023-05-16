@@ -130,6 +130,9 @@
     <Compile Include="Control\Admin\GradeManagement.xaml.cs">
       <DependentUpon>GradeManagement.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Control\Admin\Notification.xaml.cs">
+      <DependentUpon>Notification.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Control\Admin\StudentManagement.xaml.cs">
       <DependentUpon>StudentManagement.xaml</DependentUpon>
     </Compile>
@@ -193,6 +196,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Control\Admin\GradeManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\Admin\Notification.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

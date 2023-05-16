@@ -2,6 +2,7 @@
 using System.Data.SqlClient;
 using System.Linq;
 using System.Windows;
+using StudentManagement.Control.Student;
 using StudentManagement.Helper;
 using StudentManagement.Models;
 using StudentManagement.Utils;
@@ -9,6 +10,7 @@ using StudentManagement.Utils;
 namespace StudentManagement {
     public partial class StudentRole:Window {
         private string username;
+        string maSinhVien = "";
 
         private ObservableCollection<Grade> grades = DataManager.GetGradeList();
         private ObservableCollection<Student> students = DataManager.GetStudentList();
@@ -22,7 +24,7 @@ namespace StudentManagement {
         }
 
         private void loadInfo() {
-            string maSinhVien = "";
+          
 
             string sql = $"select MaSinhVien from StudentAccount where username = '{username}'";
             SqlDataReader reader = ExecuteQuery.executeReader(sql);
@@ -68,8 +70,21 @@ namespace StudentManagement {
             dgGrade.ItemsSource = personalGrades;
         }
 
+        
         private void btnUpdateInfo_Click(object sender,RoutedEventArgs e) {
+            InputInfo inputInfo = new InputInfo(maSinhVien);
+            inputInfo.ShowDialog();
+        }
 
+        private void btnExport_Click(object sender,RoutedEventArgs e) {
+            string defaultFileName = "exported_data";
+
+            string fileName = FileSaveDialog.ShowSaveDialog(defaultFileName);
+
+            if(!string.IsNullOrEmpty(fileName)) {
+                ExcelExporter.ExportExcel(dgGrade,fileName);
+                MessageBox.Show("Dữ liệu đã được xuất thành công!","Xuất dữ liệu",MessageBoxButton.OK,MessageBoxImage.Information);
+            }
         }
     }
 }
